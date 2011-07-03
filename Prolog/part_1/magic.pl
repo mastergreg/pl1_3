@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Sun 03 Jul 2011 05:30:05 PM EEST
+% * Last Modified : Mon 04 Jul 2011 02:17:28 AM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -62,8 +62,8 @@
     nextH2(BASE,AS,NXT,CARRY2).
 
 
-  makeStart([]    ,0).
-  makeStart([1]   ,1).
+  makeStart([]    ,0):-!.
+  makeStart([1]   ,1):-!.
   makeStart([L|LS],DIGITS):-
     length([L|LS],DIGITS),
     NDIG is DIGITS-1,
@@ -80,16 +80,24 @@
     reverse(SNUM,RSNUM),
     sub(BASE,SNUM,RSNUM,CONTESTANT),
   (
-    LIMIT is DIGITS/2,
-    nth(LIMIT,NUM,A),
-    A>0 -> fail 
-  ;
+%    LIMIT is DIGITS/2,
+%    nth(LIMIT,NUM,A),
+%    A>0 -> fail 
+%  ;
    is_Magic(CONTESTANT,BASE) -> RNUM=CONTESTANT
   ; 
     next(BASE,NUM,NEXT) ,findMagic(DIGITS,BASE,NEXT,RNUM)
   ).
 
-  magic(DIGITS,BASE,NUM) :-
+  computed(_,[],_,RESULT,RESULT):-!.
+  computed(BASE,[N|NUM],POWER,RESULT,RETURN):-
+    RESULT2 is RESULT+N*BASE^POWER,
+    POWER2 is POWER+1,
+    computed(BASE,NUM,POWER2,RESULT2,RETURN).
+  magic(BASE,DIGITS,NUM) :-
     makeStart(START,DIGITS),
     findMagic(DIGITS,BASE,START,RNUM),
-    reverse(RNUM,NUM).
+    %write(RNUM),
+    computed(BASE,RNUM,0,0,NUMF),
+    NUM is round(NUMF).
+    %reverse(RNUM,NUM).
