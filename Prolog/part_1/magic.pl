@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Sat 02 Jul 2011 09:10:41 PM EEST
+% * Last Modified : Sun 03 Jul 2011 03:34:26 AM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -39,8 +39,32 @@
   is_Magic(A,BASE) :-
     sort(A,SA),
     reverse(SA,RSA),
-    sub(BASE,RSA,SA,A).
+    reverse(RA,A),
+    sub(BASE,RSA,SA,RA).
     
+  next(BASE,A,NXT) :-
+    nextH(BASE,A,NXT,1,[]).
+    
+  nextH(_   ,[]    ,ACC,_    ,ACC) .
+  nextH(BASE,[A|AS],NXT,CARRY,ACC) :-
+    N is A+CARRY,
+    (N>=BASE -> DIG is N-BASE , CARRY2 = 1 ; DIG=N , CARRY2 = 0),
+    nextH(BASE,AS,NXT,CARRY2,[DIG|ACC]).
+
+  addZeros(L,0, L).
+  addZeros(L,N, FL) :-
+    N2 is N - 1,
+    !,
+    addZeros(L,N2, [0|FL]).
+  
+  nth(0,[X|_],X).
+  nth(N,[_|T],R):- M is N-1,nth(M,T,R).
+
+  findMagic(DIGITS,BASE,NUM,RNUM):-
+  (is_Magic(NUM,BASE) -> !,RNUM=NUM; next(BASE,NUM,NEXT) ,!,findMagic(DIGITS,BASE,NEXT,RNUM)).
+
   magic(DIGITS,BASE,NUM) :-
-    length(NUM,DIGITS),
-    is_Magic(NUM,BASE).
+    addZeros(START,DIGITS,[]),
+    !,
+    reverse(RNUM,NUM),
+    findMagic(DIGITS,BASE,START,RNUM).
