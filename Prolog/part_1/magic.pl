@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Sun 03 Jul 2011 05:23:45 PM EEST
+% * Last Modified : Sun 03 Jul 2011 05:30:05 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -80,11 +80,11 @@
     reverse(SNUM,RSNUM),
     sub(BASE,SNUM,RSNUM,CONTESTANT),
   (
-%    LIMIT is DIGITS/2,
-%    nth(LIMIT,NUM,A),
-%    A>0 -> fail 
-%  ;
-    is_Magic(CONTESTANT,BASE) -> RNUM=CONTESTANT
+    LIMIT is DIGITS/2,
+    nth(LIMIT,NUM,A),
+    A>0 -> fail 
+  ;
+   is_Magic(CONTESTANT,BASE) -> RNUM=CONTESTANT
   ; 
     next(BASE,NUM,NEXT) ,findMagic(DIGITS,BASE,NEXT,RNUM)
   ).
