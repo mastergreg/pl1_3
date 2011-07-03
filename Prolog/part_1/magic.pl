@@ -6,27 +6,11 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Sun 03 Jul 2011 03:34:26 AM EEST
+% * Last Modified : Sun 03 Jul 2011 04:06:24 AM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
 % _._._._._._._._._._._._._._._._._._._._._.*/
-
-
-
-  quick_sort(List,Sorted):-q_sort(List,[],Sorted).
-  q_sort([],Acc,Acc).
-  q_sort([H|T],Acc,Sorted):-
-    pivoting(H,T,L1,L2),
-      q_sort(L1,Acc,Sorted1),q_sort(L2,[H|Sorted1],Sorted).
-
-
-
-  pivoting(_,[],[],[]).
-  pivoting(H,[X|T],[X|L],G):-X=<H,pivoting(H,T,L,G).
-  pivoting(H,[X|T],L,[X|G]):-X>H,pivoting(H,T,L,G).
-
-
   sub(BASE,A,B,C) :-
    subH(BASE,A,B,0,[],C).
 
@@ -51,20 +35,30 @@
     (N>=BASE -> DIG is N-BASE , CARRY2 = 1 ; DIG=N , CARRY2 = 0),
     nextH(BASE,AS,NXT,CARRY2,[DIG|ACC]).
 
-  addZeros(L,0, L).
-  addZeros(L,N, FL) :-
-    N2 is N - 1,
-    !,
-    addZeros(L,N2, [0|FL]).
+  makeStart([]       ,0).
+  makeStart([L|LS]  ,DIGITS):-
+    length([L|LS],DIGITS),
+    NDIG is DIGITS-1,
+    L=0,
+    makeStart(LS,NDIG).
+
+    
   
   nth(0,[X|_],X).
   nth(N,[_|T],R):- M is N-1,nth(M,T,R).
 
   findMagic(DIGITS,BASE,NUM,RNUM):-
-  (is_Magic(NUM,BASE) -> !,RNUM=NUM; next(BASE,NUM,NEXT) ,!,findMagic(DIGITS,BASE,NEXT,RNUM)).
+  (
+    LIMIT is DIGITS/2,
+    nth(LIMIT,NUM,A),
+    A>0 -> makeStart(RNUM,DIGITS,[])
+  ;
+    is_Magic(NUM,BASE) -> RNUM=NUM
+  ; 
+    next(BASE,NUM,NEXT) ,findMagic(DIGITS,BASE,NEXT,RNUM)
+  ).
 
   magic(DIGITS,BASE,NUM) :-
-    addZeros(START,DIGITS,[]),
-    !,
+    makeStart(START,DIGITS),
     reverse(RNUM,NUM),
     findMagic(DIGITS,BASE,START,RNUM).
