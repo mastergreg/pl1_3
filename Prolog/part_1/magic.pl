@@ -6,30 +6,11 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Sun 03 Jul 2011 04:06:24 AM EEST
+% * Last Modified : Sun 03 Jul 2011 04:04:06 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
 % _._._._._._._._._._._._._._._._._._._._._.*/
-<<<<<<< HEAD
-=======
-%Extra unneeded comment line
-
-
-  quick_sort(List,Sorted):-q_sort(List,[],Sorted).
-  q_sort([],Acc,Acc).
-  q_sort([H|T],Acc,Sorted):-
-    pivoting(H,T,L1,L2),
-      q_sort(L1,Acc,Sorted1),q_sort(L2,[H|Sorted1],Sorted).
-
-
-
-  pivoting(_,[],[],[]).
-  pivoting(H,[X|T],[X|L],G):-X=<H,pivoting(H,T,L,G).
-  pivoting(H,[X|T],L,[X|G]):-X>H,pivoting(H,T,L,G).
-
-
->>>>>>> b7217ffa3247e8ac824ee4bc7cdbbe02b4077903
   sub(BASE,A,B,C) :-
    subH(BASE,A,B,0,[],C).
 
