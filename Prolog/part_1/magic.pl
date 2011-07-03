@@ -11,7 +11,7 @@
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
 % _._._._._._._._._._._._._._._._._._._._._.*/
-
+%Extra unneeded comment line
 
 
   quick_sort(List,Sorted):-q_sort(List,[],Sorted).
