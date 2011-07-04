@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Mon 04 Jul 2011 12:19:58 PM EEST
+% * Last Modified : Mon 04 Jul 2011 05:41:44 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -48,6 +48,34 @@
     ),
     nextH2(BASE,AS,NXT,CARRY2).
 
+  
+  nextREV(BASE,A,NXT) :-
+    nextHREV(BASE,A,NXT,1,[]).
+  nextHREV(_,[],ACC,_,ACC):-!.
+  nextHREV(BASE,[A|AS],NXT,CARRY,ACC):-
+    DIG is A+CARRY,
+    (
+      DIG<BASE -> AL = DIG, CARRY2 = 0 
+      ; (AL is 0 , CARRY2 = 1)
+    ),
+    nextHREV(BASE,AS,NXT,CARRY2,[AL|ACC]).
+
+    makeSNEXT(_  ,[]  ,[]   ):-!.
+    makeSNEXT(MAX,[R|RNXT],[S|SRNXT]):-
+      (
+          MAX<R -> MAX2 = R,S = R
+        ;
+          MAX2 = MAX , S=MAX
+      ),
+      makeSNEXT(MAX2,RNXT,SRNXT).
+
+  superNEXT(BASE,A,SNXT):-
+    nextREV(BASE,A,RNXT),
+    makeSNEXT(0,RNXT,SRNXT),
+    reverse(SRNXT,SNXT).
+
+    
+
   makeStart([]    ,0):-!.
   makeStart([L|LS],DIGITS):-
     length([L|LS],DIGITS),
@@ -75,11 +103,11 @@
   (
       failNum(LIMIT,NUM) -> RNUM=0 
     ;
-      makeContestant(BASE,NUM,CONTESTANT)
+      makeContestant(BASE,NUM,CONTESTANT),
     (
       is_Magic(CONTESTANT,BASE) -> RNUM=CONTESTANT
     ; 
-      next(BASE,NUM,NEXT),
+      superNEXT(BASE,NUM,NEXT),
       findMagic(LIMIT,BASE,NEXT,RNUM)
     )
   ).
