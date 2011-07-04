@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Mon 04 Jul 2011 05:41:44 PM EEST
+% * Last Modified : Mon 04 Jul 2011 06:28:05 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -100,17 +100,17 @@
 
   findMagic(LIMIT,BASE,NUM,RNUM):-
     !,
-  (
-      failNum(LIMIT,NUM) -> RNUM=0 
-    ;
-      makeContestant(BASE,NUM,CONTESTANT),
     (
-      is_Magic(CONTESTANT,BASE) -> RNUM=CONTESTANT
-    ; 
-      superNEXT(BASE,NUM,NEXT),
-      findMagic(LIMIT,BASE,NEXT,RNUM)
-    )
-  ).
+        failNum(LIMIT,NUM) -> RNUM=0 
+      ;
+        makeContestant(BASE,NUM,CONTESTANT),
+      (
+        is_Magic(CONTESTANT,BASE) -> RNUM=CONTESTANT
+      ; 
+        superNEXT(BASE,NUM,NEXT),
+        findMagic(LIMIT,BASE,NEXT,RNUM)
+      )
+    ).
 
   computed(_,[],_,RESULT,RESULT):-!.
   computed(BASE,[N|NUM],POWER,RESULT,RETURN):-
@@ -123,9 +123,9 @@
     LIMIT is truncate(DIGITS/2),
     findMagic(LIMIT,BASE,START,RNUM),
     computed(BASE,RNUM,0,0,NUMF),
-    NUM2 is round(NUMF),
+    NUM2 is truncate(NUMF),
     (
-      NUM2=0 -> fail
+      NUM2 = 0 -> fail
       ;
-      NUM=NUM2
+      NUM = NUM2
     ).
