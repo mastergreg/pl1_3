@@ -1,13 +1,18 @@
 % /* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 % 
-% * File Name : mama_mia.plg
+% * File Name : mama_mia.pl
 % 
 % * Purpose :
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 28 Jun 2011 07:27:18 PM EEST
+% * Last Modified : Mon 04 Jul 2011 04:17:33 AM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
 % _._._._._._._._._._._._._._._._._._._._._.*/
+
+
+
+
+  mama_mia (M,A,LI,HI,LO,HO,Prog):-
