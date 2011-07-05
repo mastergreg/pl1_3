@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 05 Jul 2011 04:12:35 AM EEST
+% * Last Modified : Tue 05 Jul 2011 05:10:47 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -39,7 +39,9 @@
   moreProg(IProg,OProg):-OProg=["M"|IProg];OProg=["A"|IProg].
 
   mama_mia(A,M,LI,HI,LO,HO,Prog):-
-    LIMIT is HO/A,
+    LIMIT1 is HO/A,
+    LIMIT2 is ceiling(log(HO)/log(M)),
+    LIMIT is min(LIMIT1,LIMIT2),
     big_mama(A,M,LI,HI,LO,HO,LIMIT,[],SProg),
     flatten(SProg,FProg),
     name(Prog,FProg).
