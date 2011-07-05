@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 05 Jul 2011 03:48:48 AM EEST
+% * Last Modified : Tue 05 Jul 2011 04:12:35 AM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -21,23 +21,25 @@
     execuTe(A,M,I,I2,P),
     big_sista(A,M,I2,O,Prog).
 
-  big_mama(A,M,LI,HI,LO,HO,Prog,RetProg):-
+  big_mama(A,M,LI,HI,LO,HO,LIMIT,Prog,RetProg):-
+    length(Prog,L),
+    L =< LIMIT,
     big_sista(A,M,LI,MLO,Prog),
     big_sista(A,M,HI,MHO,Prog),
     (
-      MLO >= LO,
-      MLO =< HO,
-      MHO >= LO,
-      MHO =< HO -> RetProg = Prog
+        MLO >= LO,
+        MLO =< HO,
+        MHO >= LO,
+        MHO =< HO -> RetProg = Prog
       ;
-        (MLO > HO ; MHO < LO) -> fail
-      ;
-        !,
         moreProg(Prog,RProg),
-        big_mama(A,M,LI,HI,LO,HO,RProg,RetProg)
+        big_mama(A,M,LI,HI,LO,HO,LIMIT,RProg,RetProg)
     ).
 
-  moreProg(IProg,OProg):-OProg=["A"|IProg];OProg=["M"|IProg].
+  moreProg(IProg,OProg):-OProg=["M"|IProg];OProg=["A"|IProg].
 
   mama_mia(A,M,LI,HI,LO,HO,Prog):-
-    big_mama(A,M,LI,HI,LO,HO,[],Prog).
+    LIMIT is HO/A,
+    big_mama(A,M,LI,HI,LO,HO,LIMIT,[],SProg),
+    flatten(SProg,FProg),
+    name(Prog,FProg).
