@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 12:55:34 AM EEST
+* Last Modified : Wed 06 Jul 2011 01:16:04 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -34,7 +34,7 @@ public class MamaMia
       ProgramsGenerator test = new ProgramsGenerator(minLimit);
       test.fillProgList();
       LinkedList<String> Progs=null;
-      for(int i = minLimit ; i< maxLimit ; i++)
+      for(int i = minLimit ; i<= maxLimit ; i++)
       {
         Progs = test.getProgList();
         for(String Prog:Progs)
@@ -43,7 +43,14 @@ public class MamaMia
           runner.run();
           if(runner.outPutCheck(lo,ho))
           {
-            System.out.println(Prog);
+            if(Progs.size()==1)
+            {
+              System.out.println("empty");
+            }
+            else
+            { 
+              System.out.println(Prog);
+            }
             return;
           }
         }

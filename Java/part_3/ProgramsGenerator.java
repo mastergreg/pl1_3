@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 12:40:58 AM EEST
+* Last Modified : Wed 06 Jul 2011 01:06:17 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -28,8 +28,7 @@ public class ProgramsGenerator
   }
   void fillProgList()
   {
-    ProgList.add("A");
-    ProgList.add("M");
+    ProgList.add("");
     for(int i=0;i<minLim;i++)
     {
       makeMoreProgs();

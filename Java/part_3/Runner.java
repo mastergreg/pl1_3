@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 12:21:55 AM EEST
+* Last Modified : Wed 06 Jul 2011 01:14:05 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -41,7 +41,7 @@ public class Runner
         mlo+=a;
         mho+=a;
       }
-      else
+      else if (c=='M')
       {
         mlo*=m;
         mho*=m;
