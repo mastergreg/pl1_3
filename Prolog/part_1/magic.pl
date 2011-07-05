@@ -6,12 +6,17 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Mon 04 Jul 2011 06:28:05 PM EEST
+% * Last Modified : Tue 05 Jul 2011 08:15:46 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
 % _._._._._._._._._._._._._._._._._._._._._.*/
-  quick_sort(List,Sorted):-q_sort(List,[],Sorted).
+
+
+
+  
+  quick_sort(List,Sorted):-
+    q_sort(List,[],Sorted).
   q_sort([],Acc,Acc).
   q_sort([H|T],Acc,Sorted):-
     pivoting(H,T,L1,L2),
@@ -77,7 +82,7 @@
     
 
   makeStart([]    ,0):-!.
-  makeStart([L|LS],DIGITS):-
+  makeStart([L|LS],DIGITS):-!,
     length([L|LS],DIGITS),
     NDIG is DIGITS-1,
     L=0,
@@ -85,21 +90,19 @@
 
     
   
-  nth(0,[X|_],X).
-  nth(N,[_|T],R):- M is N-1,nth(M,T,R).
+  %nth(0,[X|_],X).
+  %nth(N,[_|T],R):- M is N-1,nth(M,T,R).
 
 
   makeContestant(BASE,NUM,CONTESTANT):-
-      quick_sort(NUM,SNUM),
-      reverse(SNUM,RSNUM),
-      sub(BASE,SNUM,RSNUM,CONTESTANT).
+      reverse(NUM,RSNUM),
+      sub(BASE,NUM,RSNUM,CONTESTANT).
 
   failNum(LIMIT,NUM):-
     nth(LIMIT,NUM,A),
     A>0.  
 
   findMagic(LIMIT,BASE,NUM,RNUM):-
-    !,
     (
         failNum(LIMIT,NUM) -> RNUM=0 
       ;
@@ -118,12 +121,12 @@
     POWER2 is POWER+1,
     computed(BASE,NUM,POWER2,RESULT2,RETURN).
   magic(BASE,DIGITS,NUM) :-
+    use_module(library(lists)),
     makeStart(ST,DIGITS),
     next(10,ST,START),
-    LIMIT is truncate(DIGITS/2),
+    LIMIT is truncate(DIGITS/2)+1,
     findMagic(LIMIT,BASE,START,RNUM),
-    computed(BASE,RNUM,0,0,NUMF),
-    NUM2 is truncate(NUMF),
+    computed(BASE,RNUM,0,0,NUM2),
     (
       NUM2 = 0 -> fail
       ;
