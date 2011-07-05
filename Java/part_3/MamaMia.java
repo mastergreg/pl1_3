@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 12:37:41 AM EEST
+* Last Modified : Wed 06 Jul 2011 12:55:34 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -28,7 +28,8 @@ public class MamaMia
       int lo = Integer.parseInt(input[4]);
       int ho = Integer.parseInt(input[5]);
       int minLimit = 0;
-      int maxLimit =(int) Math.ceil(ho/a);
+      int maxLimit = Math.min((int) Math.ceil(ho/a)
+                        ,(int) Math.ceil(Math.log(ho)/Math.log(m)));
 
       ProgramsGenerator test = new ProgramsGenerator(minLimit);
       test.fillProgList();
@@ -40,7 +41,7 @@ public class MamaMia
         {
           Runner runner = new Runner(a,m,li,hi,Prog);
           runner.run();
-          if(runner.outPutCheck(10,20))
+          if(runner.outPutCheck(lo,ho))
           {
             System.out.println(Prog);
             return;
