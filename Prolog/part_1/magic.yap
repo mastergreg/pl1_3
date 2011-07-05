@@ -1,6 +1,6 @@
 % /* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 % 
-% * File Name : magic.pl
+% * File Name : magic.yap
 % 
 % * Purpose :
 % 

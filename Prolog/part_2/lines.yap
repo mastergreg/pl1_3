@@ -1,6 +1,6 @@
 % /* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 % 
-% * File Name : lines.pl
+% * File Name : lines.yap
 % 
 % * Purpose :
 % 
