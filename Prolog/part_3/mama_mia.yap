@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 05 Jul 2011 05:25:59 PM EEST
+% * Last Modified : Wed 06 Jul 2011 03:13:54 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -43,4 +43,5 @@
     LIMIT2 is ceiling(log(HO)/log(M)),
     LIMIT is min(LIMIT1,LIMIT2),
     big_mama(A,M,LI,HI,LO,HO,LIMIT,[],SProg),
+    !,
     atom_chars(Prog,SProg).
