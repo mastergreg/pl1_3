@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 01:16:04 AM EEST
+* Last Modified : Wed 06 Jul 2011 03:23:37 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -19,7 +19,11 @@ public class MamaMia
 {
   public static void main(String[] input)
   {
-    if(input.length == 6)
+    if(input.length != 6)
+    {
+      System.out.println("Usage: java MamaMia a m li hi lo ho");
+    }
+    else
     {
       int a = Integer.parseInt(input[0]);
       int m = Integer.parseInt(input[1]);
@@ -27,9 +31,11 @@ public class MamaMia
       int hi = Integer.parseInt(input[3]);
       int lo = Integer.parseInt(input[4]);
       int ho = Integer.parseInt(input[5]);
-      int minLimit = 0;
+      int minLimit = Math.min((int) Math.floor(lo/a)
+                        ,(int) (Math.floor(Math.log(lo)/Math.log(m))))-1;
+      System.out.println(minLimit);
       int maxLimit = Math.min((int) Math.ceil(ho/a)
-                        ,(int) Math.ceil(Math.log(ho)/Math.log(m)));
+                        ,(int) (Math.ceil(Math.log(ho)/Math.log(m))));
 
       ProgramsGenerator test = new ProgramsGenerator(minLimit);
       test.fillProgList();
@@ -57,10 +63,6 @@ public class MamaMia
         test.makeMoreProgs();
       }
       System.out.println("impossible");
-    }
-    else
-    {
-      System.out.println("Usage: java MamaMia a m li hi lo ho");
     }
   }
 }
