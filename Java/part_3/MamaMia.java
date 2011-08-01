@@ -6,13 +6,14 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 11:51:40 AM EEST
+* Last Modified : Mon 01 Aug 2011 08:33:00 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
 import java.util.LinkedList;
+import java.math.BigInteger;
 
 
 public class MamaMia
@@ -38,20 +39,21 @@ public class MamaMia
 
       int status=-1;
       ProgramsGenerator PGen = new ProgramsGenerator(minLimit);
-      LinkedList<String> Progs=null;
-      LinkedList<String> newProgs=null;
+      LinkedList<BigInteger> Progs=null;
+      LinkedList<BigInteger> newProgs=null;
       Runner runner=null;
 
       runner = new Runner();
       PGen.fillProgList();
+
       for(int i = 0 ; i<= maxLimit ; i++)
       {
         Progs = PGen.getProgList();
-        newProgs = new LinkedList<String>();
-        for(String Prog:Progs)
+        newProgs = new LinkedList<BigInteger>();
+        for(BigInteger Prog:Progs)
         {
           //runner = new Runner(a,m,li,hi,Prog);
-          runner.SetRunner(a,m,li,hi,Prog);
+          runner.SetRunner(a,m,li,hi,Prog.toString(2));
           runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)
@@ -62,7 +64,7 @@ public class MamaMia
             }
             else
             { 
-              System.out.println(Prog);
+              System.out.println(Prog.toString(2));
             }
             return;
           }
@@ -73,9 +75,9 @@ public class MamaMia
           else if (status==2)
           {
             newProgs.add(Prog);
-            //System.out.println("Status 2");
+            System.out.println("Status 2");
           }
-        System.out.println(Prog.length());
+        System.out.println(Prog.toString(2)+" "+Progs.size());
         }
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
