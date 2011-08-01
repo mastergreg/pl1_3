@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 11:51:40 AM EEST
+* Last Modified : Mon 01 Aug 2011 01:37:24 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -75,7 +75,7 @@ public class MamaMia
             newProgs.add(Prog);
             //System.out.println("Status 2");
           }
-        System.out.println(Prog.length());
+        System.out.println(Prog.length()+" "+Progs.size());
         }
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();

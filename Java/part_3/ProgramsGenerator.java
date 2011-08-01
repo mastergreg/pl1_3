@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 11:25:02 AM EEST
+* Last Modified : Mon 01 Aug 2011 03:58:48 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -19,6 +19,7 @@ public class ProgramsGenerator
 {
   private int minLim=0;
   private LinkedList<String> ProgList = null;
+  private LinkedList<String> StartList = null;
 
   public ProgramsGenerator(int minLim)
   {
@@ -35,7 +36,7 @@ public class ProgramsGenerator
   }
   public void makeMoreProgs()
   {
-    LinkedList<String> StartList;
+    //LinkedList<String> StartList;
     StartList = new LinkedList<String>();
     for(String S : ProgList)
     {

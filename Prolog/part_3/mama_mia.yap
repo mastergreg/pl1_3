@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Wed 06 Jul 2011 03:13:54 PM EEST
+% * Last Modified : Mon 01 Aug 2011 03:43:49 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -27,6 +27,9 @@
     big_sista(A,M,LI,MLO,Prog),
     big_sista(A,M,HI,MHO,Prog),
     (
+        MLO > HO,
+        MHO > HO -> fail
+      ;
         MLO >= LO,
         MLO =< HO,
         MHO >= LO,
@@ -41,7 +44,7 @@
   mama_mia(A,M,LI,HI,LO,HO,Prog):-
     LIMIT1 is HO/A,
     LIMIT2 is ceiling(log(HO)/log(M)),
-    LIMIT is min(LIMIT1,LIMIT2),
+    LIMIT is max(LIMIT1,LIMIT2),
     big_mama(A,M,LI,HI,LO,HO,LIMIT,[],SProg),
     !,
     atom_chars(Prog,SProg).
