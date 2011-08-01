@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 01:14:05 AM EEST
+* Last Modified : Mon 01 Aug 2011 11:51:56 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -14,13 +14,18 @@ _._._._._._._._._._._._._._._._._._._._._.*/
 
 public class Runner
 {
-  int a=0;
-  int m=0;
-  int li=0;
-  int hi=0;
-  int mlo=0;
-  int mho=0;
-  String prog;
+  private int a=0;
+  private int m=0;
+  private int li=0;
+  private int hi=0;
+  private int mlo=0;
+  private int mho=0;
+  private String prog;
+
+  Runner()
+  {
+
+  }
   Runner(int a,int m,int li,int hi,String prog)
   {
     this.a=a;
@@ -31,7 +36,17 @@ public class Runner
     this.mho=hi;
     this.prog = prog;
   }
-  void run()
+  public void SetRunner(int a,int m,int li,int hi,String prog)
+  {
+    this.a=a;
+    this.m=m;
+    this.li=li;
+    this.mlo=li;
+    this.hi=hi;
+    this.mho=hi;
+    this.prog = prog;
+  }
+  public void run()
   {
     for(int i = 0; i < prog.length() ; i++)
     {
@@ -56,12 +71,12 @@ public class Runner
   {
     return mlo;
   }
-  public boolean outPutCheck(int lo,int ho)
+  public int outPutCheck(int lo,int ho)
   {
-    if(mlo<lo) return false;
-    if(mho>ho) return false;
-    if(mlo>ho) return false;
-    if(mho<lo) return false;
-    return true;
+    if(mho>ho) return 1; //high out exceeded
+    if(mlo>ho) return 1; //
+    if(mlo<lo) return 2; //low out not reached
+    if(mho<lo) return 2; //
+    return 0;
   }
 }

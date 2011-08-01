@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 01:06:17 AM EEST
+* Last Modified : Mon 01 Aug 2011 11:25:02 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -17,16 +17,15 @@ import java.util.LinkedList;
 
 public class ProgramsGenerator
 {
-  int minLim=0;
-  LinkedList<String> ProgList = null;
+  private int minLim=0;
+  private LinkedList<String> ProgList = null;
 
-
-  ProgramsGenerator(int minLim)
+  public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
     ProgList = new LinkedList<String>();
   }
-  void fillProgList()
+  public void fillProgList()
   {
     ProgList.add("");
     for(int i=0;i<minLim;i++)
@@ -34,7 +33,7 @@ public class ProgramsGenerator
       makeMoreProgs();
     }
   }
-  void makeMoreProgs()
+  public void makeMoreProgs()
   {
     LinkedList<String> StartList;
     StartList = new LinkedList<String>();
@@ -45,11 +44,15 @@ public class ProgramsGenerator
     }
     ProgList=StartList;
   }
-  LinkedList<String> getProgList()
+  public void setProgList(LinkedList<String> newPLst)
+  {
+    ProgList=newPLst;
+  }
+  public LinkedList<String> getProgList()
   {
     return ProgList;
   }
-  void printProgs()
+  public void printProgs()
   {
     for(String S : ProgList)
     {

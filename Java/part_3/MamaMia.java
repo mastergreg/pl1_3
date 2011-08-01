@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 06 Jul 2011 03:23:37 PM EEST
+* Last Modified : Mon 01 Aug 2011 11:51:40 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -32,22 +32,29 @@ public class MamaMia
       int lo = Integer.parseInt(input[4]);
       int ho = Integer.parseInt(input[5]);
       int minLimit = Math.min((int) Math.floor(lo/a)
-                        ,(int) (Math.floor(Math.log(lo)/Math.log(m))))-1;
-      System.out.println(minLimit);
-      int maxLimit = Math.min((int) Math.ceil(ho/a)
-                        ,(int) (Math.ceil(Math.log(ho)/Math.log(m))));
+                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))))-1;
+      int maxLimit = Math.max((int) Math.ceil(ho/a)
+                 ,(int) (Math.ceil(Math.log(ho)/Math.log(m))));
 
-      ProgramsGenerator test = new ProgramsGenerator(minLimit);
-      test.fillProgList();
+      int status=-1;
+      ProgramsGenerator PGen = new ProgramsGenerator(minLimit);
       LinkedList<String> Progs=null;
-      for(int i = minLimit ; i<= maxLimit ; i++)
+      LinkedList<String> newProgs=null;
+      Runner runner=null;
+
+      runner = new Runner();
+      PGen.fillProgList();
+      for(int i = 0 ; i<= maxLimit ; i++)
       {
-        Progs = test.getProgList();
+        Progs = PGen.getProgList();
+        newProgs = new LinkedList<String>();
         for(String Prog:Progs)
         {
-          Runner runner = new Runner(a,m,li,hi,Prog);
+          //runner = new Runner(a,m,li,hi,Prog);
+          runner.SetRunner(a,m,li,hi,Prog);
           runner.run();
-          if(runner.outPutCheck(lo,ho))
+          status = runner.outPutCheck(lo,ho);
+          if(status==0)
           {
             if(Progs.size()==1)
             {
@@ -59,8 +66,19 @@ public class MamaMia
             }
             return;
           }
+          else if (status==1)
+          {
+            //System.out.println("Status 1");
+          }
+          else if (status==2)
+          {
+            newProgs.add(Prog);
+            //System.out.println("Status 2");
+          }
+        System.out.println(Prog.length());
         }
-        test.makeMoreProgs();
+        PGen.setProgList(newProgs);
+        PGen.makeMoreProgs();
       }
       System.out.println("impossible");
     }
