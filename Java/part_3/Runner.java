@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 11:51:56 AM EEST
+* Last Modified : Tue 02 Aug 2011 07:29:16 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -51,12 +51,12 @@ public class Runner
     for(int i = 0; i < prog.length() ; i++)
     {
       char c = prog.charAt(i);
-      if (c=='A')
+      if (c=='0')
       {
         mlo+=a;
         mho+=a;
       }
-      else if (c=='M')
+      else if (c=='1')
       {
         mlo*=m;
         mho*=m;
