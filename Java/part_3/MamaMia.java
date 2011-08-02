@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 01:37:24 PM EEST
+* Last Modified : Tue 02 Aug 2011 03:04:09 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -43,11 +43,12 @@ public class MamaMia
       Runner runner=null;
 
       runner = new Runner();
+      newProgs = new LinkedList<String>();
       PGen.fillProgList();
       for(int i = 0 ; i<= maxLimit ; i++)
       {
         Progs = PGen.getProgList();
-        newProgs = new LinkedList<String>();
+        newProgs.clear();
         for(String Prog:Progs)
         {
           //runner = new Runner(a,m,li,hi,Prog);
@@ -75,8 +76,9 @@ public class MamaMia
             newProgs.add(Prog);
             //System.out.println("Status 2");
           }
-        System.out.println(Prog.length()+" "+Progs.size());
+        //System.out.println(Prog.length()+" "+Progs.size());
         }
+        System.out.println(Progs.size());
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
       }

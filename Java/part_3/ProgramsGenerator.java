@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 03:58:48 PM EEST
+* Last Modified : Tue 02 Aug 2011 03:16:22 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -36,8 +36,7 @@ public class ProgramsGenerator
   }
   public void makeMoreProgs()
   {
-    //LinkedList<String> StartList;
-    StartList = new LinkedList<String>();
+    StartList=new LinkedList<String>();
     for(String S : ProgList)
     {
       StartList.add(S+"A");
