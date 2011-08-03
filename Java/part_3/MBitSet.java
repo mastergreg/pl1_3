@@ -6,7 +6,7 @@
 
 * Creation Date : 03-08-2011
 
-* Last Modified : Wed 03 Aug 2011 01:02:57 PM EEST
+* Last Modified : Wed 03 Aug 2011 01:45:15 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -23,7 +23,10 @@ public class MBitSet extends BitSet
   {
     super();
     myLength=0;
-    SBLD = new StringBuilder();
+  }
+  MBitSet(int size)
+  {
+    super(size);
   }
   public void set(int index)
   {

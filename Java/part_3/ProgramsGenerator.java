@@ -6,20 +6,20 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 03 Aug 2011 01:06:12 PM EEST
+* Last Modified : Wed 03 Aug 2011 02:23:23 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 
 public class ProgramsGenerator
 {
   private int minLim=0;
-  private LinkedList<MBitSet> ProgList = null;
-  private LinkedList<MBitSet> StartList = null;
+  private ArrayList<MBitSet> ProgList = null;
+  private ArrayList<MBitSet> StartList = null;
   private int progLen;
 
   private MBitSet BuffA = null;
@@ -27,12 +27,12 @@ public class ProgramsGenerator
   public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
-    ProgList = new LinkedList<MBitSet>();
+    ProgList = new ArrayList<MBitSet>();
     progLen=0;
   }
   public void fillProgList()
   {
-    ProgList.add(new MBitSet());
+    ProgList.add(new MBitSet(minLim));
     for(int i=0;i<minLim;i++)
     {
       makeMoreProgs();
@@ -42,7 +42,8 @@ public class ProgramsGenerator
   {
     //System.gc();
     progLen++;
-    StartList=new LinkedList<MBitSet>();
+    StartList=new ArrayList<MBitSet>();
+    StartList.ensureCapacity(2*ProgList.size());
     for(MBitSet S : ProgList)
     {
       BuffA = (MBitSet) S.clone();
@@ -54,11 +55,11 @@ public class ProgramsGenerator
     }
     ProgList=StartList;
   }
-  public void setProgList(LinkedList<MBitSet> newPLst)
+  public void setProgList(ArrayList<MBitSet> newPLst)
   {
     ProgList=newPLst;
   }
-  public LinkedList<MBitSet> getProgList()
+  public ArrayList<MBitSet> getProgList()
   {
     return ProgList;
   }
