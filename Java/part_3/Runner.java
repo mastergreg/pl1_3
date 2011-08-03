@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 11:51:56 AM EEST
+* Last Modified : Wed 03 Aug 2011 01:01:15 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -20,13 +20,13 @@ public class Runner
   private int hi=0;
   private int mlo=0;
   private int mho=0;
-  private String prog;
+  private MBitSet prog;
 
   Runner()
   {
 
   }
-  Runner(int a,int m,int li,int hi,String prog)
+  Runner(int a,int m,int li,int hi,MBitSet prog)
   {
     this.a=a;
     this.m=m;
@@ -36,7 +36,7 @@ public class Runner
     this.mho=hi;
     this.prog = prog;
   }
-  public void SetRunner(int a,int m,int li,int hi,String prog)
+  public void SetRunner(int a,int m,int li,int hi,MBitSet prog)
   {
     this.a=a;
     this.m=m;
@@ -48,15 +48,15 @@ public class Runner
   }
   public void run()
   {
-    for(int i = 0; i < prog.length() ; i++)
+    int len = prog.getMyLength();
+    for(int i = 0; i < len ; i++)
     {
-      char c = prog.charAt(i);
-      if (c=='A')
+      if (prog.get(i))
       {
         mlo+=a;
         mho+=a;
       }
-      else if (c=='M')
+      else
       {
         mlo*=m;
         mho*=m;
