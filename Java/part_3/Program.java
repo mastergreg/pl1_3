@@ -6,7 +6,7 @@
 
 * Creation Date : 02-08-2011
 
-* Last Modified : Tue 02 Aug 2011 07:36:15 PM EEST
+* Last Modified : Wed 03 Aug 2011 11:17:41 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -23,10 +23,9 @@ public class Program
   {
     length=0;
     CurrentCounter = 1;
-    ListSize = 1;
+    ListSize = 0;
     curr=new Integer(0);
     Prog = new LinkedList<Integer>();
-    Prog.add(curr);
   }
   public Program(Program p)
   {
@@ -34,21 +33,21 @@ public class Program
     CurrentCounter=p.getCurrentCounter();
     ListSize=p.getListSize();
     Prog=p.getProg();
-    curr=Prog.getLast();
+    curr=p.getCurr();
   }
   private void shiftR()
   {
     if(CurrentCounter<32)
     {
       CurrentCounter++;
-      curr*=2;
+      curr=curr*2;
     }
     else
     {
       CurrentCounter=0;
       ListSize++;
-      curr = new Integer(0);
       Prog.add(curr);
+      curr = new Integer(0);
     }
     length++;
   }
@@ -85,13 +84,24 @@ public class Program
   {
     return new LinkedList<Integer>(Prog);
   }
+  public Integer getCurr()
+  {
+    return curr;
+  }
   public String toString()
   {
     String s="";
     for(Integer I:Prog)
     {
-      s+=I.intValue();
+      s+=Integer.toBinaryString(I.intValue());
     }
+    s+=Integer.toBinaryString(curr.intValue());
+    //int rem = length-s.length();
+    //String a="";
+    //for(int i=0;i<rem;i++)
+    //{
+    //  a+="0";
+    //}
     return s;
   }
 

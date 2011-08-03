@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Tue 02 Aug 2011 07:29:16 PM EEST
+* Last Modified : Wed 03 Aug 2011 11:19:41 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -47,6 +47,23 @@ public class Runner
     this.prog = prog;
   }
   public void run()
+  {
+    for(int i = 0; i < prog.length() ; i++)
+    {
+      char c = prog.charAt(i);
+      if (c=='1')
+      {
+        mlo+=a;
+        mho+=a;
+      }
+      else if (c=='0')
+      {
+        mlo*=m;
+        mho*=m;
+      }
+    }
+  }
+  public void runAgain()
   {
     for(int i = 0; i < prog.length() ; i++)
     {

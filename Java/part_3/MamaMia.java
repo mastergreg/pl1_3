@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Tue 02 Aug 2011 07:26:42 PM EEST
+* Last Modified : Wed 03 Aug 2011 11:22:23 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -48,8 +48,8 @@ public class MamaMia
       for(int i = 0 ; i<= maxLimit ; i++)
       {
         Progs = PGen.getProgList();
-        PGen.printProgs();
         newProgs.clear();
+        //PGen.printProgs();
         for(Program Prog:Progs)
         {
           //runner = new Runner(a,m,li,hi,Prog);
@@ -77,9 +77,36 @@ public class MamaMia
             newProgs.add(Prog);
             //System.out.println("Status 2");
           }
-        //System.out.println(Prog.length()+" "+Progs.size());
+        //System.out.println(Prog.toString().length()+" "+Prog.getLength()+" "+Progs.size());
+        //System.out.println(Prog.getLength());
+          //runner = new Runner(a,m,li,hi,Prog);
+          runner.runAgain();
+          status = runner.outPutCheck(lo,ho);
+          if(status==0)
+          {
+            if(Progs.size()==1)
+            {
+              System.out.println("empty");
+            }
+            else
+            { 
+              System.out.println(Prog);
+            }
+            return;
+          }
+          else if (status==1)
+          {
+            //System.out.println("Status 1");
+          }
+          else if (status==2)
+          {
+            newProgs.add(Prog);
+            //System.out.println("Status 2");
+          }
+        //System.out.println(Prog.toString().length()+" "+Prog.getLength()+" "+Progs.size());
+        //System.out.println(Prog.getLength());
         }
-        //System.out.println(Progs.size());
+        System.out.println(Progs.size());
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
       }
