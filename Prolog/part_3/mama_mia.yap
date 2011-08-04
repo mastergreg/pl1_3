@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Mon 01 Aug 2011 03:43:49 PM EEST
+% * Last Modified : Thu 04 Aug 2011 09:53:44 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -27,13 +27,16 @@
     big_sista(A,M,LI,MLO,Prog),
     big_sista(A,M,HI,MHO,Prog),
     (
-        MLO > HO,
+        MLO > HO -> fail
+      ;
         MHO > HO -> fail
       ;
+        MW is MHO-MLO,
+        W is HO-LO,
+        MW > W -> fail
+      ;
         MLO >= LO,
-        MLO =< HO,
-        MHO >= LO,
-        MHO =< HO -> RetProg = Prog
+        MHO >= LO -> RetProg = Prog
       ;
         moreProg(Prog,RProg),
         big_mama(A,M,LI,HI,LO,HO,LIMIT,RProg,RetProg)
@@ -42,8 +45,8 @@
   moreProg(IProg,OProg):-OProg=['M'|IProg];OProg=['A'|IProg].
 
   mama_mia(A,M,LI,HI,LO,HO,Prog):-
-    LIMIT1 is HO/A,
-    LIMIT2 is ceiling(log(HO)/log(M)),
+    LIMIT1 is HO div A,
+    LIMIT2 is ceiling(((log(HO)))/((log(M)))),
     LIMIT is max(LIMIT1,LIMIT2),
     big_mama(A,M,LI,HI,LO,HO,LIMIT,[],SProg),
     !,
