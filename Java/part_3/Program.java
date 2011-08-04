@@ -1,12 +1,12 @@
 /* -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 
-* File Name : MBitSet.java
+* File Name : Program.java
 
 * Purpose :
 
 * Creation Date : 03-08-2011
 
-* Last Modified : Wed 03 Aug 2011 01:45:15 PM EEST
+* Last Modified : Wed 03 Aug 2011 04:04:59 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -14,17 +14,17 @@ _._._._._._._._._._._._._._._._._._._._._.*/
 
 import java.util.BitSet;
 
-public class MBitSet extends BitSet
+public class Program extends BitSet
 {
   private int myLength;
   private StringBuilder SBLD;
   
-  MBitSet()
+  Program()
   {
     super();
     myLength=0;
   }
-  MBitSet(int size)
+  Program(int size)
   {
     super(size);
   }

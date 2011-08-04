@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 03 Aug 2011 01:58:49 PM EEST
+* Last Modified : Thu 04 Aug 2011 01:34:23 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -20,13 +20,15 @@ public class Runner
   private int hi=0;
   private int mlo=0;
   private int mho=0;
-  private MBitSet prog;
+  private Program prog;
+  private int width=0;
+  private int mwidth=0;
 
   Runner()
   {
 
   }
-  Runner(int a,int m,int li,int hi,MBitSet prog)
+  Runner(int a,int m,int li,int hi,Program prog)
   {
     this.a=a;
     this.m=m;
@@ -36,7 +38,7 @@ public class Runner
     this.mho=hi;
     this.prog = prog;
   }
-  public void SetRunner(int a,int m,int li,int hi,MBitSet prog)
+  public void SetRunner(int a,int m,int li,int hi,Program prog)
   {
     this.a=a;
     this.m=m;
@@ -46,7 +48,7 @@ public class Runner
     this.mho=hi;
     this.prog = prog;
   }
-  public void run()
+  private void run()
   {
     int len = prog.getMyLength();
     for(int i = 0; i < len ; i++)
@@ -62,6 +64,7 @@ public class Runner
         mho*=m;
       }
     }
+    mwidth=mho-mlo;
   }
   public int getMHO()
   {
@@ -73,6 +76,9 @@ public class Runner
   }
   public int outPutCheck(int lo,int ho)
   {
+    run();
+    width=ho-lo;
+    if(mwidth>width) return 1;
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
     if(mlo<lo) return 2; //low out not reached
