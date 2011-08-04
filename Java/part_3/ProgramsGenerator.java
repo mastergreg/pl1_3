@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 04 Aug 2011 03:21:55 PM EEST
+* Last Modified : Wed 03 Aug 2011 04:03:31 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -45,9 +45,8 @@ public class ProgramsGenerator
     StartList.ensureCapacity(2*ProgList.size());
     for(Program S : ProgList)
     {
-      S.set(S.getMyLength());
       BuffA = (Program) S.clone();
-      //BuffA.set(S.getMyLength());
+      BuffA.set(S.getMyLength());
       StartList.add(BuffA);
       BuffM = (Program) S.clone();
       BuffM.clear(S.getMyLength());
