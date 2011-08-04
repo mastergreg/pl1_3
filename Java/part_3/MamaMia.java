@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Tue 02 Aug 2011 03:04:09 PM EEST
+* Last Modified : Thu 04 Aug 2011 08:42:43 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -38,21 +38,21 @@ public class MamaMia
 
       int status=-1;
       ProgramsGenerator PGen = new ProgramsGenerator(minLimit);
-      LinkedList<String> Progs=null;
-      LinkedList<String> newProgs=null;
+      LinkedList<Program> Progs=null;
+      LinkedList<Program> newProgs=null;
       Runner runner=null;
 
       runner = new Runner();
-      newProgs = new LinkedList<String>();
+      newProgs = new LinkedList<Program>();
       PGen.fillProgList();
       for(int i = 0 ; i<= maxLimit ; i++)
       {
         Progs = PGen.getProgList();
         newProgs.clear();
-        for(String Prog:Progs)
+        for(Program Prog:Progs)
         {
           //runner = new Runner(a,m,li,hi,Prog);
-          runner.SetRunner(a,m,li,hi,Prog);
+          runner.SetRunner(a,m,li,hi,Prog.toString());
           runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)
@@ -78,7 +78,6 @@ public class MamaMia
           }
         //System.out.println(Prog.length()+" "+Progs.size());
         }
-        System.out.println(Progs.size());
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
       }

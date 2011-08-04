@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Tue 02 Aug 2011 03:16:22 PM EEST
+* Last Modified : Thu 04 Aug 2011 08:01:28 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -18,17 +18,17 @@ import java.util.LinkedList;
 public class ProgramsGenerator
 {
   private int minLim=0;
-  private LinkedList<String> ProgList = null;
-  private LinkedList<String> StartList = null;
+  private LinkedList<Program> ProgList = null;
+  private LinkedList<Program> StartList = null;
 
   public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
-    ProgList = new LinkedList<String>();
+    ProgList = new LinkedList<Program>();
   }
   public void fillProgList()
   {
-    ProgList.add("");
+    ProgList.add(new Program());
     for(int i=0;i<minLim;i++)
     {
       makeMoreProgs();
@@ -36,25 +36,29 @@ public class ProgramsGenerator
   }
   public void makeMoreProgs()
   {
-    StartList=new LinkedList<String>();
-    for(String S : ProgList)
+    StartList=new LinkedList<Program>();
+    for(Program S : ProgList)
     {
-      StartList.add(S+"A");
-      StartList.add(S+"M");
+      Program BuffA = S.clone();
+      Program BuffM = S.clone();
+      BuffA.add('A');
+      BuffM.add('M');
+      StartList.add(BuffA);
+      StartList.add(BuffM);
     }
     ProgList=StartList;
   }
-  public void setProgList(LinkedList<String> newPLst)
+  public void setProgList(LinkedList<Program> newPLst)
   {
     ProgList=newPLst;
   }
-  public LinkedList<String> getProgList()
+  public LinkedList<Program> getProgList()
   {
     return ProgList;
   }
   public void printProgs()
   {
-    for(String S : ProgList)
+    for(Program S : ProgList)
     {
       System.out.println(S);
     }

@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 11:51:56 AM EEST
+* Last Modified : Thu 04 Aug 2011 08:43:55 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -20,6 +20,7 @@ public class Runner
   private int hi=0;
   private int mlo=0;
   private int mho=0;
+  private int mwidth=0;
   private String prog;
 
   Runner()
@@ -48,7 +49,7 @@ public class Runner
   }
   public void run()
   {
-    for(int i = 0; i < prog.length() ; i++)
+    for(int i = 1; i < prog.length() ; i++)
     {
       char c = prog.charAt(i);
       if (c=='A')
@@ -62,6 +63,7 @@ public class Runner
         mho*=m;
       }
     }
+    mwidth = mho-mlo;
   }
   public int getMHO()
   {
@@ -73,6 +75,8 @@ public class Runner
   }
   public int outPutCheck(int lo,int ho)
   {
+    int width = ho = lo;
+    if(mwidth>width) return 1;
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
     if(mlo<lo) return 2; //low out not reached
