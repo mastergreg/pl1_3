@@ -6,7 +6,7 @@
 
 * Creation Date : 04-08-2011
 
-* Last Modified : Thu 04 Aug 2011 08:46:12 PM EEST
+* Last Modified : Fri 05 Aug 2011 08:54:59 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -16,39 +16,6 @@ import java.util.LinkedList;
 
 public class Program implements Cloneable
 { 
-  private class PR
-  {
-    private int times;
-    private char character;
-
-    PR(char c)
-    {
-      times = 1;
-      character = c;
-    }
-    PR(int t,char C)
-    {
-      times=t;
-      character = C;
-    }
-
-    public void inc()
-    {
-      times++;
-    }
-    public char getC()
-    {
-      return character;
-    }
-    public int getTimes()
-    {
-      return times;
-    }
-    public  PR clone()
-    {
-      return new PR(times,character);
-    }
-  }
   private LinkedList<PR> Prog = null;
   private PR last = null;
   public Program()
@@ -82,6 +49,10 @@ public class Program implements Cloneable
     }
 
   }
+  public LinkedList<PR> getProg()
+  {
+    return Prog;
+  }
   public Program clone()
   {
     LinkedList<PR> newProg = new LinkedList<PR>();
@@ -98,6 +69,7 @@ public class Program implements Cloneable
     {
       int t = p.getTimes();
       char c = p.getC();
+      if(c != 'S')
       for(int i=0;i<t;i++)
       {
         S.append(c);

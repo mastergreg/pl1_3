@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 04 Aug 2011 08:42:43 PM EEST
+* Last Modified : Fri 05 Aug 2011 08:56:07 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -25,6 +25,7 @@ public class MamaMia
     }
     else
     {
+      System.out.println(Math.pow(2,3));
       int a = Integer.parseInt(input[0]);
       int m = Integer.parseInt(input[1]);
       int li = Integer.parseInt(input[2]);
@@ -52,7 +53,7 @@ public class MamaMia
         for(Program Prog:Progs)
         {
           //runner = new Runner(a,m,li,hi,Prog);
-          runner.SetRunner(a,m,li,hi,Prog.toString());
+          runner.SetRunner(a,m,li,hi,Prog);
           runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)

@@ -6,12 +6,13 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 04 Aug 2011 08:43:55 PM EEST
+* Last Modified : Fri 05 Aug 2011 08:55:45 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
+import java.util.LinkedList;
 public class Runner
 {
   private int a=0;
@@ -21,13 +22,13 @@ public class Runner
   private int mlo=0;
   private int mho=0;
   private int mwidth=0;
-  private String prog;
+  private Program prog;
 
   Runner()
   {
 
   }
-  Runner(int a,int m,int li,int hi,String prog)
+  Runner(int a,int m,int li,int hi,Program prog)
   {
     this.a=a;
     this.m=m;
@@ -37,7 +38,7 @@ public class Runner
     this.mho=hi;
     this.prog = prog;
   }
-  public void SetRunner(int a,int m,int li,int hi,String prog)
+  public void SetRunner(int a,int m,int li,int hi,Program prog)
   {
     this.a=a;
     this.m=m;
@@ -49,20 +50,24 @@ public class Runner
   }
   public void run()
   {
-    for(int i = 1; i < prog.length() ; i++)
+    LinkedList<PR> P = prog.getProg();
+    for(PR rlP : P)
     {
-      char c = prog.charAt(i);
+      int t = rlP.getTimes();
+      int c = rlP.getC();
+
       if (c=='A')
       {
-        mlo+=a;
-        mho+=a;
+        mlo+=a*t;
+        mho+=a*t;
       }
       else if (c=='M')
       {
-        mlo*=m;
-        mho*=m;
+        mlo*=Math.pow(m,t);
+        mho*=Math.pow(m,t);
       }
     }
+
     mwidth = mho-mlo;
   }
   public int getMHO()
@@ -75,7 +80,7 @@ public class Runner
   }
   public int outPutCheck(int lo,int ho)
   {
-    int width = ho = lo;
+    int width = ho - lo;
     if(mwidth>width) return 1;
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
