@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Fri 05 Aug 2011 08:56:07 AM EEST
+* Last Modified : Fri 05 Aug 2011 08:59:16 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -25,7 +25,6 @@ public class MamaMia
     }
     else
     {
-      System.out.println(Math.pow(2,3));
       int a = Integer.parseInt(input[0]);
       int m = Integer.parseInt(input[1]);
       int li = Integer.parseInt(input[2]);
