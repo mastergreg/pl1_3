@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 03 Aug 2011 04:03:27 PM EEST
+* Last Modified : Sat 06 Aug 2011 08:14:28 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -32,7 +32,7 @@ public class MamaMia
       int lo = Integer.parseInt(input[4]);
       int ho = Integer.parseInt(input[5]);
       int minLimit = Math.min((int) Math.floor(lo/a)
-                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))))-1;
+                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))));
       int maxLimit = Math.max((int) Math.ceil(ho/a)
                  ,(int) (Math.ceil(Math.log(ho)/Math.log(m))));
 

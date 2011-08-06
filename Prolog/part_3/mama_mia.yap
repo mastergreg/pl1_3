@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Thu 04 Aug 2011 09:53:44 PM EEST
+% * Last Modified : Sat 06 Aug 2011 01:18:21 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -21,11 +21,15 @@
     execuTe(A,M,I,I2,P),
     big_sista(A,M,I2,O,Prog).
 
+  bigga_sista(A,M,LI,HI,MLO,MHO,Prog):-
+    big_sista(A,M,LI,MLO,Prog),
+    big_sista(A,M,HI,MHO,Prog).
+    
+
   big_mama(A,M,LI,HI,LO,HO,LIMIT,Prog,RetProg):-
     length(Prog,L),
+    bigga_sista(A,M,LI,HI,MLO,MHO,Prog),
     L =< LIMIT,
-    big_sista(A,M,LI,MLO,Prog),
-    big_sista(A,M,HI,MHO,Prog),
     (
         MLO > HO -> fail
       ;
@@ -45,9 +49,10 @@
   moreProg(IProg,OProg):-OProg=['M'|IProg];OProg=['A'|IProg].
 
   mama_mia(A,M,LI,HI,LO,HO,Prog):-
-    LIMIT1 is HO div A,
+    LIMIT1 is HO / A,
     LIMIT2 is ceiling(((log(HO)))/((log(M)))),
     LIMIT is max(LIMIT1,LIMIT2),
     big_mama(A,M,LI,HI,LO,HO,LIMIT,[],SProg),
     !,
+    set_prolog_flag(to_chars_mode,iso),
     atom_chars(Prog,SProg).
