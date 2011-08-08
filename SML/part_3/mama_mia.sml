@@ -35,7 +35,14 @@ fun decode [] = explode("impossible")
 fun addA t = encode #"A" t
 fun addM t = encode #"M" t
 
-fun pow (a:int) (b:int) = ceil(Math.pow(real(a),real(b)))
+fun pow a b =
+    let
+      fun powH (a:int) (0:int) acc = acc
+        | powH (a:int) (b:int) acc = powH a (b-1) (acc*a)
+    in
+      powH a b 1
+    end
+
 fun execute a m li hi [] = (li,hi)
   | execute a m li hi ((#"A",hn:int)::tl) = execute a m (li+a*hn) (hi+a*hn) tl
   | execute a m li hi ((#"M",hn:int)::tl) = 
@@ -58,10 +65,28 @@ fun nextProgs progs =
 
 
 
-fun outPutCheck a m li hi lo ho []    = outPutCheck a m li hi lo ho (initProgs())
+fun outPutCheck a m li hi lo ho []    = 
+    let
+      fun minLimit a m li hi lo = 
+        if a=0 andalso m>1
+          then
+            ceil( Math.ln (real lo) / Math.ln (real m))
+          else
+            if a>0 andalso m=1
+              then
+                ceil ((real lo) / (real a))
+              else
+                 Int.min(floor(real lo/real a),floor(Math.ln(real lo)/Math.ln(real m))) 
+      fun makeStartProgs minLim []    = makeStartProgs (minLim-1) (initProgs())
+        | makeStartProgs 1      progs = progs
+        | makeStartProgs minLim progs = makeStartProgs (minLim-1) (nextProgs progs)
+    in
+      outPutCheck a m li hi lo ho (makeStartProgs (minLimit a m li hi lo) [])
+    end
+
   | outPutCheck a m li hi lo ho progs =
   let
-    fun maxLimit a m li hi lo ho = 
+    fun maxLimit a m li hi ho = 
       if a=0 andalso m>1
         then
           ceil( Math.ln (real ho) / Math.ln (real m))
@@ -72,15 +97,15 @@ fun outPutCheck a m li hi lo ho []    = outPutCheck a m li hi lo ho (initProgs()
             else
               Int.max(ceil ((real ho) / (real a)), ceil( Math.ln (real ho) / Math.ln (real m)))
     val startL = length(hd(progs))
-    val maxl = maxLimit a m li hi lo ho
+    val maxl = maxLimit a m li hi ho
     fun outPutLess mlo mho lo ho = mho < lo orelse mlo < lo
     fun outPutExceeded mlo mho lo ho = 
       mho>ho orelse mlo > ho orelse (mho-mlo)>(ho-lo)
-    fun outPutCheckH _ _ _  _  _  _  _     _       []        []    []  =  []
-      | outPutCheckH a m li hi lo ho maxl  l       []        []    acc = 
-        outPutCheckH a m li hi lo ho maxl  (l+1)   (nextProgs acc) [] []
-      | outPutCheckH _ _ _  _  _  _  _     _       []        found    _ = found
-      | outPutCheckH a m li hi lo ho maxl  l       (p::rogs) found acc = 
+    fun outPutCheckH _ _ _  _  _  _  _     _       []               []    []  =  []
+      | outPutCheckH a m li hi lo ho maxl  l       []               []    acc = 
+        outPutCheckH a m li hi lo ho maxl  (l+1)   (nextProgs acc)  []    []
+      | outPutCheckH _ _ _  _  _  _  _     _       []               found _   = found
+      | outPutCheckH a m li hi lo ho maxl  l       (p::rogs)        found acc = 
         let
           val (mlo,mho)=execute a m li hi p
         in
@@ -133,14 +158,7 @@ fun mama_mia a m li hi lo ho =
   end
 
 
-
-
-
-
-
-  
-
-
+(*MLton part*)
 
 fun main() =
   let
