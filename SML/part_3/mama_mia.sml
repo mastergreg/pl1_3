@@ -23,8 +23,7 @@ fun encode (c:char) [] = [(c,1)]
       else (c,1)::(hc,hn)::tl
 
 
-fun decode [] = explode("impossible")
-  | decode rle =
+fun decode rle =
   let
     fun decodeH [] (s:char list) = rev s
       | decodeH ((hc:char,1)::tl) (s:char list) = decodeH tl (hc::s)
@@ -78,53 +77,58 @@ fun outPutCheck a m li hi lo ho []    =
               else
                  Int.min(floor(real lo/real a),floor(Math.ln(real lo)/Math.ln(real m))) 
       fun makeStartProgs minLim []    = makeStartProgs (minLim-1) (initProgs())
-        | makeStartProgs 1      progs = progs
+        | makeStartProgs 0      progs = progs
         | makeStartProgs minLim progs = makeStartProgs (minLim-1) (nextProgs progs)
+      val minl = minLimit a m li hi lo
     in
-      outPutCheck a m li hi lo ho (makeStartProgs (minLimit a m li hi lo) [])
+      outPutCheck a m li hi lo ho (makeStartProgs (minl) [])
     end
 
   | outPutCheck a m li hi lo ho progs =
-  let
-    fun maxLimit a m li hi ho = 
-      if a=0 andalso m>1
-        then
-          ceil( Math.ln (real ho) / Math.ln (real m))
-        else
-          if a>0 andalso m=1
-            then
-              ceil ((real ho) / (real a))
-            else
-              Int.max(ceil ((real ho) / (real a)), ceil( Math.ln (real ho) / Math.ln (real m)))
-    val startL = length(hd(progs))
-    val maxl = maxLimit a m li hi ho
-    fun outPutLess mlo mho lo ho = mho < lo orelse mlo < lo
-    fun outPutExceeded mlo mho lo ho = 
-      mho>ho orelse mlo > ho orelse (mho-mlo)>(ho-lo)
-    fun outPutCheckH _ _ _  _  _  _  _     _       []               []    []  =  []
-      | outPutCheckH a m li hi lo ho maxl  l       []               []    acc = 
-        outPutCheckH a m li hi lo ho maxl  (l+1)   (nextProgs acc)  []    []
-      | outPutCheckH _ _ _  _  _  _  _     _       []               found _   = found
-      | outPutCheckH a m li hi lo ho maxl  l       (p::rogs)        found acc = 
-        let
-          val (mlo,mho)=execute a m li hi p
-        in
+    let
+      fun maxLimit a m li hi ho = 
+        if a=0 andalso m>1
+          then
+            ceil( Math.ln (real ho) / Math.ln (real m))
+          else
+            if a>0 andalso m=1
+              then
+                ceil ((real ho) / (real a))
+              else
+                Int.max(ceil ((real ho) / (real a)), ceil( Math.ln (real ho) / Math.ln (real m)))
+      val maxl = maxLimit a m li hi ho
+      val startl = length (hd progs)
+      fun outPutLess mlo mho lo ho = mho < lo orelse mlo < lo
+      fun outPutExceeded mlo mho lo ho = 
+        mho>ho orelse mlo > ho orelse (mho-mlo)>(ho-lo)
+      fun outPutCheckH _ _ _  _  _  _  _     _       []               []    []  =  []
+        | outPutCheckH a m li hi lo ho maxl  l       []               []    acc = 
           if l > maxl 
             then 
               []
             else
-              if  (outPutExceeded mlo mho lo ho) (*exceed output*)
-                then 
-                  outPutCheckH a m li hi lo ho maxl  l rogs found acc
-                else
-                  if outPutLess mlo mho lo ho
-                    then
-                      outPutCheckH a m li hi lo ho maxl  l rogs found (p::acc)
+              outPutCheckH a m li hi lo ho maxl  (l+1)   (nextProgs acc)  []    []
+        | outPutCheckH _ _ _  _  _  _  _     _       []               found _   = found
+        | outPutCheckH a m li hi lo ho maxl  l       (p::rogs)        found acc = 
+            if l > maxl 
+              then 
+                  []
+              else
+                let
+                  val (mlo,mho)=execute a m li hi p
+                in
+                  if  (outPutExceeded mlo mho lo ho) (*exceed output*)
+                    then 
+                      outPutCheckH a m li hi lo ho maxl  l rogs found acc
                     else
-                      outPutCheckH a m li hi lo ho maxl  l rogs (p::found) acc
-        end
+                      if outPutLess mlo mho lo ho
+                        then
+                          outPutCheckH a m li hi lo ho maxl  l rogs found (p::acc)
+                        else
+                          outPutCheckH a m li hi lo ho maxl  l rogs (p::found) acc
+                end
     in
-      outPutCheckH a m li hi lo ho maxl 1 progs [] []
+      outPutCheckH a m li hi lo ho maxl startl progs [] []
     end
            
 
@@ -132,7 +136,8 @@ fun outPutCheck a m li hi lo ho []    =
       
 fun mama_mia a m li hi lo ho = 
   let
-    fun lexTest ls =  
+    fun lexTest [] = "impossible"  
+      | lexTest ls =  
       let
         val decoded = map implode (map decode ls)
         fun lexTestH [] less = less
