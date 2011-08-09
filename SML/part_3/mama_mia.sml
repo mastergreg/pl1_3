@@ -134,24 +134,23 @@ fun outPutCheck a m li hi lo ho []    =
 
 
       
+fun lexTest [] = "impossible"  
+  | lexTest ls =  
+  let
+    val decoded = map implode (map decode ls)
+    fun lexTestH [] less = less
+      | lexTestH (d::ls) ""  = lexTestH ls d
+      | lexTestH (d::ls) less = 
+        if String.compare(d,less) = General.LESS
+          then
+            lexTestH ls d
+          else
+            lexTestH ls less
+  in
+    lexTestH decoded ""
+  end
 fun mama_mia a m li hi lo ho = 
   let
-    fun lexTest [] = "impossible"  
-      | lexTest ls =  
-      let
-        val decoded = map implode (map decode ls)
-        fun lexTestH [] less = less
-          | lexTestH (d::ls) ""  = d
-          | lexTestH (d::ls) less = 
-            if String.compare(d,less) = General.LESS
-              then
-                lexTestH ls d
-              else
-                lexTestH ls less
-      in
-        lexTestH decoded ""
-      end
-
     fun primeCheck li hi lo ho = 
       li >= lo andalso li <= ho andalso hi >= lo andalso hi <=ho
   in
