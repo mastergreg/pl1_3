@@ -6,7 +6,7 @@
 
 * Creation Date : 04-08-2011
 
-* Last Modified : Wed 10 Aug 2011 08:09:39 PM EEST
+* Last Modified : Wed 10 Aug 2011 08:48:48 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -22,7 +22,7 @@ public class Program implements Cloneable
   public Program()
   {
     Prog = new LinkedList<PR>();
-    Prog.add(new PR('S'));
+    //Prog.add(new PR('S'));
   }
   public Program(LinkedList<PR> newP)
   {
@@ -30,9 +30,9 @@ public class Program implements Cloneable
   }
   public void add(char C)
   {
-    last = Prog.getLast();
-    if(last!=null)
+    try
     {
+      last = Prog.getLast();
       if(last.getC()==C)
       {
         last.inc();
@@ -43,12 +43,11 @@ public class Program implements Cloneable
         Prog.add(last);
       }
     }
-    else
+    catch(java.util.NoSuchElementException e)
     {
       last = new PR(C);
       Prog.add(last);
     }
-
   }
   public LinkedList<PR> getProg()
   {

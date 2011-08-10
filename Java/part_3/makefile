@@ -4,6 +4,7 @@ zip:
 	zip MamaMia.zip -xi *.java
 tar:
 	tar -czvf MamaMia.tar.gz *.java
+allTest: test Bigtest
 test:
 		time -p java MamaMia 1 2 2 3 10 20
 		time -p java MamaMia 3 2 2 3 4 5

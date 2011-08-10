@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 10 Aug 2011 08:11:48 PM EEST
+* Last Modified : Wed 10 Aug 2011 08:49:09 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -61,7 +61,7 @@ public class Runner
         mlo+=a*t;
         mho+=a*t;
       }
-      else if (c=='M')
+      else 
       {
         mlo*=Math.pow(m,t);
         mho*=Math.pow(m,t);
