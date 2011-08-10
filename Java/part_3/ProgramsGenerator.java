@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 08:28:51 PM EEST
+* Last Modified : Wed 10 Aug 2011 02:33:27 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -21,28 +21,19 @@ public class ProgramsGenerator
   private int minLim=0;
   private LinkedList<BigInteger> ProgList = null;
   private LinkedList<BigInteger> StartList = null;
-  private BigInteger one = null;
-  private BigInteger two = null;
 
   public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
-    one = new BigInteger("1");
-    two = new BigInteger("2");
     ProgList = new LinkedList<BigInteger>();
   }
   public void fillProgList()
   {
-    StartList = new LinkedList<BigInteger>();
-    StartList.add(new BigInteger("0"));
-    StartList.add(new BigInteger("1"));
-    ProgList=StartList;
-    
-    //ProgList.add("");
-    //for(int i=0;i<minLim;i++)
-    //{
-    //  makeMoreProgs();
-    //}
+    ProgList.add(BigInteger.ONE);
+    for(int i=0;i<minLim;i++)
+    {
+      makeMoreProgs();
+    }
   }
   public void makeMoreProgs()
   {

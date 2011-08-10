@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Mon 01 Aug 2011 08:33:00 PM EEST
+* Last Modified : Wed 10 Aug 2011 02:55:41 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -53,7 +53,7 @@ public class MamaMia
         for(BigInteger Prog:Progs)
         {
           //runner = new Runner(a,m,li,hi,Prog);
-          runner.SetRunner(a,m,li,hi,Prog.toString(2));
+          runner.SetRunner(a,m,li,hi,Prog);
           runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)
@@ -64,7 +64,7 @@ public class MamaMia
             }
             else
             { 
-              System.out.println(Prog.toString(2));
+              System.out.println(runner);
             }
             return;
           }
@@ -75,9 +75,9 @@ public class MamaMia
           else if (status==2)
           {
             newProgs.add(Prog);
-            System.out.println("Status 2");
+            //System.out.println("Status 2");
           }
-        System.out.println(Prog.toString(2)+" "+Progs.size());
+        //System.out.println(Prog.toString(2)+" "+Progs.size());
         }
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
