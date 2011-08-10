@@ -3,4 +3,4 @@ all:
 zip:
 	zip MamaMia.zip -xi *.java
 tar:
-	tar -czvf MamaMia.tar *.java
+	tar -czvf MamaMia.tar.gz *.java
