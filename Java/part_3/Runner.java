@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Fri 05 Aug 2011 08:55:45 AM EEST
+* Last Modified : Wed 10 Aug 2011 08:11:48 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -80,8 +80,7 @@ public class Runner
   }
   public int outPutCheck(int lo,int ho)
   {
-    int width = ho - lo;
-    if(mwidth>width) return 1;
+    if(mwidth>ho - lo) return 1;
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
     if(mlo<lo) return 2; //low out not reached

@@ -6,13 +6,13 @@
 
  * Creation Date : 05-08-2011
 
- * Last Modified : Fri 05 Aug 2011 08:49:04 AM EEST
+ * Last Modified : Wed 10 Aug 2011 07:36:00 PM EEST
 
  * Created By : Greg Liras <gregliras@gmail.com>
 
  _._._._._._._._._._._._._._._._._._._._._.*/
 
-public class PR
+public class PR implements Cloneable
 {
   private int times;
   private char character;
