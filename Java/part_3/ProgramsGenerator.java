@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 09:59:59 PM EEST
+* Last Modified : Thu 11 Aug 2011 10:17:22 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -57,13 +57,6 @@ public class ProgramsGenerator
   public ArrayList<Program> getProgList()
   {
     return ProgList;
-  }
-  public void printProgs()
-  {
-    for(Program S : ProgList)
-    {
-      System.out.println(S);
-    }
   }
 }
 

@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 07:27:12 PM EEST
+* Last Modified : Thu 11 Aug 2011 10:15:59 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -42,7 +42,7 @@ public class MamaMia
       ArrayList<Program> newProgs=null;
       Runner runner=null;
 
-      runner = new Runner();
+      runner = new Runner(a,m,li,hi);
       newProgs = new ArrayList<Program>();
       PGen.fillProgList();
       for(int i = 0 ; i<= maxLimit ; i++)
@@ -51,8 +51,7 @@ public class MamaMia
         newProgs.clear();
         for(Program Prog:Progs)
         {
-          //runner = new Runner(a,m,li,hi,Prog);
-          runner.SetRunner(a,m,li,hi,Prog);
+          runner.SetRunner(li,hi,Prog);
           runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)

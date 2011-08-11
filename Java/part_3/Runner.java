@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 09:23:40 PM EEST
+* Last Modified : Thu 11 Aug 2011 10:24:47 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -21,7 +21,6 @@ public class Runner
   private int hi=0;
   private int mlo=0;
   private int mho=0;
-  private int mwidth=0;
   private int mul=0;
   private double pow=0;
   private Program prog;
@@ -30,33 +29,28 @@ public class Runner
   {
 
   }
-  Runner(int a,int m,int li,int hi,Program prog)
+  Runner(int a,int m,int li,int hi)
   {
     this.a=a;
     this.m=m;
     this.li=li;
-    this.mlo=li;
     this.hi=hi;
-    this.mho=hi;
-    this.prog = prog;
   }
-  public void SetRunner(int a,int m,int li,int hi,Program prog)
+  public void SetRunner(int li,int hi,Program prog)
   {
-    this.a=a;
-    this.m=m;
-    this.li=li;
     this.mlo=li;
-    this.hi=hi;
     this.mho=hi;
     this.prog = prog;
   }
   public void run()
   {
     ArrayList<PR> P = prog.getProg();
+    int t = 0;
+    char c = '0';
     for(PR rlP : P)
     {
-      int t = rlP.getTimes();
-      int c = rlP.getC();
+      t = rlP.getTimes();
+      c = rlP.getC();
 
       if (c=='A')
       {
@@ -72,17 +66,9 @@ public class Runner
       }
     }
   }
-  public int getMHO()
-  {
-    return mho;
-  }
-  public int getMLO()
-  {
-    return mlo;
-  }
   public int outPutCheck(int lo,int ho)
   {
-    if(mho-mlo>ho - lo) return 1;
+    if(mho-mlo>ho - lo) return 1; //high out width
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
     if(mlo<lo) return 2; //low out not reached
