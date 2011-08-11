@@ -6,13 +6,13 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 10 Aug 2011 03:04:04 PM EEST
+* Last Modified : Sat 06 Aug 2011 08:14:28 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 
 public class MamaMia
@@ -32,29 +32,27 @@ public class MamaMia
       int lo = Integer.parseInt(input[4]);
       int ho = Integer.parseInt(input[5]);
       int minLimit = Math.min((int) Math.floor(lo/a)
-                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))))-1;
+                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))));
       int maxLimit = Math.max((int) Math.ceil(ho/a)
                  ,(int) (Math.ceil(Math.log(ho)/Math.log(m))));
 
       int status=-1;
       ProgramsGenerator PGen = new ProgramsGenerator(minLimit);
-      LinkedList<Program> Progs=null;
-      LinkedList<Program> newProgs=null;
+      ArrayList<Program> Progs=null;
+      ArrayList<Program> newProgs=null;
       Runner runner=null;
 
       runner = new Runner();
-      newProgs = new LinkedList<Program>();
+      newProgs = new ArrayList<Program>();
       PGen.fillProgList();
       for(int i = 0 ; i<= maxLimit ; i++)
       {
         Progs = PGen.getProgList();
-        //PGen.printProgs();
         newProgs.clear();
+        newProgs.ensureCapacity(Progs.size());
         for(Program Prog:Progs)
         {
-          //runner = new Runner(a,m,li,hi,Prog);
           runner.SetRunner(a,m,li,hi,Prog);
-          runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)
           {
@@ -80,6 +78,8 @@ public class MamaMia
         //System.out.println(Prog.toString().length()+" "+Progs.size());
         }
         //PGen.printProgsSize();
+        //PGen.printProgs();
+        newProgs.trimToSize();
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
       }

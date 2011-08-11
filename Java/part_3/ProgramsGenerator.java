@@ -6,20 +6,20 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 10 Aug 2011 03:02:42 PM EEST
+* Last Modified : Fri 05 Aug 2011 09:01:44 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 
 public class ProgramsGenerator
 {
   private int minLim=0;
-  private LinkedList<Program> ProgList = null;
-  private LinkedList<Program> StartList = null;
+  private ArrayList<Program> ProgList = null;
+  private ArrayList<Program> StartList = null;
   private int progLen;
 
   private Program BuffA = null;
@@ -27,12 +27,12 @@ public class ProgramsGenerator
   public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
-    ProgList = new LinkedList<Program>();
+    ProgList = new ArrayList<Program>();
     progLen=0;
   }
   public void fillProgList()
   {
-    ProgList.add(new Program());
+    ProgList.add(new Program(minLim));
     for(int i=0;i<minLim;i++)
     {
       makeMoreProgs();
@@ -40,9 +40,9 @@ public class ProgramsGenerator
   }
   public void makeMoreProgs()
   {
-    //System.gc();
     progLen++;
-    StartList=new LinkedList<Program>();
+    StartList=new ArrayList<Program>();
+    StartList.ensureCapacity(2*ProgList.size());
     for(Program S : ProgList)
     {
       BuffA = (Program) S.clone();
@@ -54,11 +54,11 @@ public class ProgramsGenerator
     }
     ProgList=StartList;
   }
-  public void setProgList(LinkedList<Program> newPLst)
+  public void setProgList(ArrayList<Program> newPLst)
   {
     ProgList=newPLst;
   }
-  public LinkedList<Program> getProgList()
+  public ArrayList<Program> getProgList()
   {
     return ProgList;
   }
@@ -66,7 +66,7 @@ public class ProgramsGenerator
   {
     for(Program S : ProgList)
     {
-      System.out.println(S.toString());
+      System.out.println(S);
     }
   }
   public void printProgsSize()

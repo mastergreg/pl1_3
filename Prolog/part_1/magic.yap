@@ -6,29 +6,25 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 05 Jul 2011 08:15:46 PM EEST
+% * Last Modified : Tue 09 Aug 2011 07:56:52 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
 % _._._._._._._._._._._._._._._._._._._._._.*/
 
-
-
-  
+  :-initialization(use_module(library(lists))).
   quick_sort(List,Sorted):-
     q_sort(List,[],Sorted).
   q_sort([],Acc,Acc).
   q_sort([H|T],Acc,Sorted):-
     pivoting(H,T,L1,L2),
     q_sort(L1,Acc,Sorted1),q_sort(L2,[H|Sorted1],Sorted).
-
   pivoting(_,[],[],[]).
   pivoting(H,[X|T],[X|L],G):-X=<H,pivoting(H,T,L,G).
   pivoting(H,[X|T],L,[X|G]):-X>H,pivoting(H,T,L,G).
 
   sub(BASE,A,B,C) :-
    subH(BASE,A,B,0,C).
-
   subH(_   ,[]     ,_     ,_    ,[]) :-!.
   subH(BASE,[A|AS] ,[B|BS],CARRY,[C|CS]) :-
     AL is B-A-CARRY,
@@ -42,7 +38,6 @@
     
   next(BASE,A,NXT) :-
     nextH2(BASE,A,NXT,1).
-
   nextH2(_   ,[]    ,[]     ,_) :- !.
   nextH2(_   ,AS    ,AS     ,0) :- !.
   nextH2(BASE,[A|AS],[N|NXT],CARRY):-
@@ -53,7 +48,6 @@
     ),
     nextH2(BASE,AS,NXT,CARRY2).
 
-  
   nextREV(BASE,A,NXT) :-
     nextHREV(BASE,A,NXT,1,[]).
   nextHREV(_,[],ACC,_,ACC):-!.
@@ -65,14 +59,14 @@
     ),
     nextHREV(BASE,AS,NXT,CARRY2,[AL|ACC]).
 
-    makeSNEXT(_  ,[]  ,[]   ):-!.
-    makeSNEXT(MAX,[R|RNXT],[S|SRNXT]):-
-      (
-          MAX<R -> MAX2 = R,S = R
-        ;
-          MAX2 = MAX , S=MAX
-      ),
-      makeSNEXT(MAX2,RNXT,SRNXT).
+  makeSNEXT(_  ,[]  ,[]   ):-!.
+  makeSNEXT(MAX,[R|RNXT],[S|SRNXT]):-
+    (
+        MAX<R -> MAX2 = R,S = R
+      ;
+        MAX2 = MAX , S=MAX
+    ),
+    makeSNEXT(MAX2,RNXT,SRNXT).
 
   superNEXT(BASE,A,SNXT):-
     nextREV(BASE,A,RNXT),
@@ -121,7 +115,6 @@
     POWER2 is POWER+1,
     computed(BASE,NUM,POWER2,RESULT2,RETURN).
   magic(BASE,DIGITS,NUM) :-
-    use_module(library(lists)),
     makeStart(ST,DIGITS),
     next(10,ST,START),
     LIMIT is truncate(DIGITS/2)+1,
