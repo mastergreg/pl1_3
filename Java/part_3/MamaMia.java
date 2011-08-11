@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 10:15:59 PM EEST
+* Last Modified : Thu 11 Aug 2011 10:35:19 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -51,7 +51,7 @@ public class MamaMia
         newProgs.clear();
         for(Program Prog:Progs)
         {
-          runner.SetRunner(li,hi,Prog);
+          runner.SetRunner(Prog);
           runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)

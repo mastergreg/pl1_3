@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 10:24:47 PM EEST
+* Last Modified : Thu 11 Aug 2011 10:55:34 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -25,21 +25,17 @@ public class Runner
   private double pow=0;
   private Program prog;
 
-  Runner()
-  {
-
-  }
-  Runner(int a,int m,int li,int hi)
+  public Runner(int a,int m,int li,int hi)
   {
     this.a=a;
     this.m=m;
     this.li=li;
     this.hi=hi;
   }
-  public void SetRunner(int li,int hi,Program prog)
+  public void SetRunner(Program prog)
   {
-    this.mlo=li;
-    this.mho=hi;
+    mlo=li;
+    mho=hi;
     this.prog = prog;
   }
   public void run()

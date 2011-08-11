@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 10:17:22 PM EEST
+* Last Modified : Thu 11 Aug 2011 11:19:44 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -27,6 +27,8 @@ public class ProgramsGenerator
   {
     this.minLim=minLim;
     ProgList = new ArrayList<Program>();
+
+    StartList=new ArrayList<Program>();
   }
   public void fillProgList()
   {
@@ -41,12 +43,15 @@ public class ProgramsGenerator
     StartList=new ArrayList<Program>();
     for(Program S : ProgList)
     {
-      BuffA = S.clone();
-      BuffM = S.clone();
-      BuffA.add('A');
-      BuffM.add('M');
-      StartList.add(BuffA);
-      StartList.add(BuffM);
+      //BuffA=S.clone();
+      //BuffM=S.clone();
+      //BuffA.add('A');
+      //BuffM.add('M');
+
+      //StartList.add(BuffA);
+      //StartList.add(BuffM);
+      StartList.add(S.addA());
+      StartList.add(S.addM());
     }
     ProgList=StartList;
   }

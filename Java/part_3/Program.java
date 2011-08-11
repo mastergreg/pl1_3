@@ -6,7 +6,7 @@
 
 * Creation Date : 04-08-2011
 
-* Last Modified : Thu 11 Aug 2011 10:20:43 PM EEST
+* Last Modified : Thu 11 Aug 2011 11:18:36 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -47,18 +47,32 @@ public class Program implements Cloneable
       Prog.add(last);
     }
   }
+  public Program clone()
+  {
+    ArrayList<PR> newProg = new ArrayList<PR>(Prog);
+    int lastIndex = Prog.size()-1;
+    if(lastIndex>=0)
+    {
+      newProg.set(lastIndex,last.clone());
+    }
+    return new Program(newProg);
+  } 
+
   public ArrayList<PR> getProg()
   {
     return Prog;
   }
-  public Program clone()
+  public Program addM()
   {
-    ArrayList<PR> newProg = new ArrayList<PR>();
-    for(PR p : Prog)
-    {
-      newProg.add(p.clone());
-    }
-    return new Program(newProg);
+    Program p = clone();
+    p.add('M');
+    return p;
+  }
+  public Program addA()
+  {
+    Program p = clone();
+    p.add('A');
+    return p;
   }
   public String toString()
   {
