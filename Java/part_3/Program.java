@@ -6,7 +6,7 @@
 
 * Creation Date : 04-08-2011
 
-* Last Modified : Thu 11 Aug 2011 07:31:53 PM EEST
+* Last Modified : Thu 11 Aug 2011 09:29:01 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -21,7 +21,6 @@ public class Program implements Cloneable
   public Program()
   {
     Prog = new ArrayList<PR>();
-    //Prog.add(new PR('S'));
   }
   public Program(ArrayList<PR> newP)
   {
@@ -31,7 +30,7 @@ public class Program implements Cloneable
   {
     try
     {
-      last = Prog.get(Prog.size());
+      last = Prog.get(Prog.size()-1);
       if(last.getC()==C)
       {
         last.inc();
@@ -68,7 +67,6 @@ public class Program implements Cloneable
     {
       int t = p.getTimes();
       char c = p.getC();
-      if(c != 'S')
       for(int i=0;i<t;i++)
       {
         S.append(c);

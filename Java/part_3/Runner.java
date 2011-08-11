@@ -6,7 +6,7 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 11 Aug 2011 07:27:12 PM EEST
+* Last Modified : Thu 11 Aug 2011 09:23:40 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -22,6 +22,8 @@ public class Runner
   private int mlo=0;
   private int mho=0;
   private int mwidth=0;
+  private int mul=0;
+  private double pow=0;
   private Program prog;
 
   Runner()
@@ -58,17 +60,17 @@ public class Runner
 
       if (c=='A')
       {
-        mlo+=a*t;
-        mho+=a*t;
+        mul = a*t;
+        mlo+=mul;
+        mho+=mul;
       }
       else 
       {
-        mlo*=Math.pow(m,t);
-        mho*=Math.pow(m,t);
+        pow=Math.pow(m,t);
+        mlo*=pow;
+        mho*=pow;
       }
     }
-
-    mwidth = mho-mlo;
   }
   public int getMHO()
   {
@@ -80,7 +82,7 @@ public class Runner
   }
   public int outPutCheck(int lo,int ho)
   {
-    if(mwidth>ho - lo) return 1;
+    if(mho-mlo>ho - lo) return 1;
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
     if(mlo<lo) return 2; //low out not reached
