@@ -1,9 +1,9 @@
 all:
 	mlton mama_mia.sml
 test:
-		time -p ./mama_mia 1 2 2 3 10 20
-		time -p ./mama_mia 3 2 2 3 4 5
-		time -p ./mama_mia 5 3 2 3 2 3
+		time -p ./tester.sh "./mama_mia 1 2 2 3 10 20"
+		time -p ./tester.sh "./mama_mia 3 2 2 3 4 5"
+		time -p ./tester.sh "./mama_mia 5 3 2 3 2 3"
 Bigtest:
-		time -p ./mama_mia 2 42 42 1764 72364 74087
-		time -p ./mama_mia 2 4 1 3 9000 9500
+		time -p ./tester.sh "./mama_mia 2 42 42 1764 72364 74087"
+		time -p ./tester.sh "./mama_mia 2 4 1 3 9000 9500"
