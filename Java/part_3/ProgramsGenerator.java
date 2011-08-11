@@ -6,25 +6,25 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 10 Aug 2011 08:36:47 PM EEST
+* Last Modified : Thu 11 Aug 2011 07:27:04 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 
 public class ProgramsGenerator
 {
   private int minLim=0;
-  private LinkedList<Program> ProgList = null;
-  private LinkedList<Program> StartList = null;
+  private ArrayList<Program> ProgList = null;
+  private ArrayList<Program> StartList = null;
 
   public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
-    ProgList = new LinkedList<Program>();
+    ProgList = new ArrayList<Program>();
   }
   public void fillProgList()
   {
@@ -36,7 +36,7 @@ public class ProgramsGenerator
   }
   public void makeMoreProgs()
   {
-    StartList=new LinkedList<Program>();
+    StartList=new ArrayList<Program>();
     for(Program S : ProgList)
     {
       Program BuffA = S.clone();
@@ -48,11 +48,11 @@ public class ProgramsGenerator
     }
     ProgList=StartList;
   }
-  public void setProgList(LinkedList<Program> newPLst)
+  public void setProgList(ArrayList<Program> newPLst)
   {
     ProgList=newPLst;
   }
-  public LinkedList<Program> getProgList()
+  public ArrayList<Program> getProgList()
   {
     return ProgList;
   }

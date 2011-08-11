@@ -1,9 +1,9 @@
 #!/bin/bash
 run1=$1
 test1=$($1)
-test1Solution=$(grep "$run1" tests)
+test1Solution=$(grep "$run1" tests | sed s/"\"$run1\" "//)
 tput sgr0                               # Reset colors to "normal."  
-if [[ $test1Solution == *"$test1" ]]; then
+if [[ $test1Solution == $test1 ]]; then
   echo -e $run1 '\E[0;32mPass'
 else
   echo -e $run1 '\E[0;31mFail'

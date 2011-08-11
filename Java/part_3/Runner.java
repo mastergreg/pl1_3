@@ -6,13 +6,13 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Wed 10 Aug 2011 08:49:09 PM EEST
+* Last Modified : Thu 11 Aug 2011 07:27:12 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 public class Runner
 {
   private int a=0;
@@ -50,7 +50,7 @@ public class Runner
   }
   public void run()
   {
-    LinkedList<PR> P = prog.getProg();
+    ArrayList<PR> P = prog.getProg();
     for(PR rlP : P)
     {
       int t = rlP.getTimes();

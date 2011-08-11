@@ -6,13 +6,13 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Fri 05 Aug 2011 08:59:16 AM EEST
+* Last Modified : Thu 11 Aug 2011 07:27:12 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 
 public class MamaMia
@@ -38,12 +38,12 @@ public class MamaMia
 
       int status=-1;
       ProgramsGenerator PGen = new ProgramsGenerator(minLimit);
-      LinkedList<Program> Progs=null;
-      LinkedList<Program> newProgs=null;
+      ArrayList<Program> Progs=null;
+      ArrayList<Program> newProgs=null;
       Runner runner=null;
 
       runner = new Runner();
-      newProgs = new LinkedList<Program>();
+      newProgs = new ArrayList<Program>();
       PGen.fillProgList();
       for(int i = 0 ; i<= maxLimit ; i++)
       {

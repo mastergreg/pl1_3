@@ -6,25 +6,24 @@
 
 * Creation Date : 04-08-2011
 
-* Last Modified : Wed 10 Aug 2011 08:48:48 PM EEST
+* Last Modified : Thu 11 Aug 2011 07:31:53 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Program implements Cloneable
 { 
-  private LinkedList<PR> Prog = null;
+  private ArrayList<PR> Prog = null;
   private PR last = null;
   public Program()
   {
-    Prog = new LinkedList<PR>();
+    Prog = new ArrayList<PR>();
     //Prog.add(new PR('S'));
   }
-  public Program(LinkedList<PR> newP)
+  public Program(ArrayList<PR> newP)
   {
     Prog = newP;
   }
@@ -32,7 +31,7 @@ public class Program implements Cloneable
   {
     try
     {
-      last = Prog.getLast();
+      last = Prog.get(Prog.size());
       if(last.getC()==C)
       {
         last.inc();
@@ -43,19 +42,19 @@ public class Program implements Cloneable
         Prog.add(last);
       }
     }
-    catch(java.util.NoSuchElementException e)
+    catch(java.lang.IndexOutOfBoundsException e)
     {
       last = new PR(C);
       Prog.add(last);
     }
   }
-  public LinkedList<PR> getProg()
+  public ArrayList<PR> getProg()
   {
     return Prog;
   }
   public Program clone()
   {
-    LinkedList<PR> newProg = new LinkedList<PR>();
+    ArrayList<PR> newProg = new ArrayList<PR>();
     for(PR p : Prog)
     {
       newProg.add(p.clone());

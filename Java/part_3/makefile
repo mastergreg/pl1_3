@@ -1,5 +1,7 @@
 all:
 	javac MamaMia.java
+clean:
+	rm *.class
 zip:
 	zip MamaMia.zip -xi *.java
 tar:
