@@ -4,9 +4,9 @@ test1=$($1)
 test1Solution=$(grep "$run1" tests)
 tput sgr0                               # Reset colors to "normal."  
 if [[ $test1Solution == *"$test1" ]]; then
-  echo -en '\E[0;32m'$test1'\n'
+  echo -e $run1 '\E[0;32mPass'
 else
-  echo -en '\E[0;31m'$test1'\n'
+  echo -e $run1 '\E[0;31mFail'
 fi
 tput sgr0                               # Reset colors to "normal."  
 
