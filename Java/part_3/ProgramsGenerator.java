@@ -6,33 +6,29 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Fri 05 Aug 2011 09:01:44 AM EEST
+* Last Modified : Wed 10 Aug 2011 08:36:47 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class ProgramsGenerator
 {
   private int minLim=0;
-  private ArrayList<Program> ProgList = null;
-  private ArrayList<Program> StartList = null;
-  private int progLen;
+  private LinkedList<Program> ProgList = null;
+  private LinkedList<Program> StartList = null;
 
-  private Program BuffA = null;
-  private Program BuffM = null;
   public ProgramsGenerator(int minLim)
   {
     this.minLim=minLim;
-    ProgList = new ArrayList<Program>();
-    progLen=0;
+    ProgList = new LinkedList<Program>();
   }
   public void fillProgList()
   {
-    ProgList.add(new Program(minLim));
+    ProgList.add(new Program());
     for(int i=0;i<minLim;i++)
     {
       makeMoreProgs();
@@ -40,25 +36,23 @@ public class ProgramsGenerator
   }
   public void makeMoreProgs()
   {
-    progLen++;
-    StartList=new ArrayList<Program>();
-    StartList.ensureCapacity(2*ProgList.size());
+    StartList=new LinkedList<Program>();
     for(Program S : ProgList)
     {
-      BuffA = (Program) S.clone();
-      BuffA.set(S.getMyLength());
+      Program BuffA = S.clone();
+      Program BuffM = S.clone();
+      BuffA.add('A');
+      BuffM.add('M');
       StartList.add(BuffA);
-      BuffM = (Program) S.clone();
-      BuffM.clear(S.getMyLength());
       StartList.add(BuffM);
     }
     ProgList=StartList;
   }
-  public void setProgList(ArrayList<Program> newPLst)
+  public void setProgList(LinkedList<Program> newPLst)
   {
     ProgList=newPLst;
   }
-  public ArrayList<Program> getProgList()
+  public LinkedList<Program> getProgList()
   {
     return ProgList;
   }
@@ -68,10 +62,6 @@ public class ProgramsGenerator
     {
       System.out.println(S);
     }
-  }
-  public void printProgsSize()
-  {
-    System.out.println(progLen);
   }
 }
 

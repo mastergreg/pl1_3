@@ -6,12 +6,13 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Thu 04 Aug 2011 01:34:23 PM EEST
+* Last Modified : Wed 10 Aug 2011 08:49:09 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
+import java.util.LinkedList;
 public class Runner
 {
   private int a=0;
@@ -20,9 +21,8 @@ public class Runner
   private int hi=0;
   private int mlo=0;
   private int mho=0;
-  private Program prog;
-  private int width=0;
   private int mwidth=0;
+  private Program prog;
 
   Runner()
   {
@@ -48,23 +48,27 @@ public class Runner
     this.mho=hi;
     this.prog = prog;
   }
-  private void run()
+  public void run()
   {
-    int len = prog.getMyLength();
-    for(int i = 0; i < len ; i++)
+    LinkedList<PR> P = prog.getProg();
+    for(PR rlP : P)
     {
-      if (prog.get(i))
+      int t = rlP.getTimes();
+      int c = rlP.getC();
+
+      if (c=='A')
       {
-        mlo+=a;
-        mho+=a;
+        mlo+=a*t;
+        mho+=a*t;
       }
-      else
+      else 
       {
-        mlo*=m;
-        mho*=m;
+        mlo*=Math.pow(m,t);
+        mho*=Math.pow(m,t);
       }
     }
-    mwidth=mho-mlo;
+
+    mwidth = mho-mlo;
   }
   public int getMHO()
   {
@@ -76,9 +80,7 @@ public class Runner
   }
   public int outPutCheck(int lo,int ho)
   {
-    run();
-    width=ho-lo;
-    if(mwidth>width) return 1;
+    if(mwidth>ho - lo) return 1;
     if(mho>ho) return 1; //high out exceeded
     if(mlo>ho) return 1; //
     if(mlo<lo) return 2; //low out not reached

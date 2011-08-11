@@ -4,59 +4,78 @@
 
 * Purpose :
 
-* Creation Date : 03-08-2011
+* Creation Date : 04-08-2011
 
-* Last Modified : Wed 03 Aug 2011 04:04:59 PM EEST
+* Last Modified : Wed 10 Aug 2011 08:48:48 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.BitSet;
+import java.util.LinkedList;
+import java.util.List;
 
-public class Program extends BitSet
-{
-  private int myLength;
-  private StringBuilder SBLD;
-  
-  Program()
+public class Program implements Cloneable
+{ 
+  private LinkedList<PR> Prog = null;
+  private PR last = null;
+  public Program()
   {
-    super();
-    myLength=0;
+    Prog = new LinkedList<PR>();
+    //Prog.add(new PR('S'));
   }
-  Program(int size)
+  public Program(LinkedList<PR> newP)
   {
-    super(size);
+    Prog = newP;
   }
-  public void set(int index)
+  public void add(char C)
   {
-    super.set(index);
-    myLength++;
-  }
-  public void clear(int index)
-  {
-    super.clear(index);
-    myLength++;
-  }
-  public int getMyLength()
-  {
-    return myLength;
-  }
-  public String toString()
-  {
-    SBLD = new StringBuilder(myLength);
-    for (int i =0; i < myLength ; i++)
+    try
     {
-      if(this.get(i))
+      last = Prog.getLast();
+      if(last.getC()==C)
       {
-        SBLD.append("A");
+        last.inc();
       }
       else
       {
-        SBLD.append("M");
+        last = new PR(C);
+        Prog.add(last);
       }
     }
-    return SBLD.toString();
+    catch(java.util.NoSuchElementException e)
+    {
+      last = new PR(C);
+      Prog.add(last);
+    }
   }
-
+  public LinkedList<PR> getProg()
+  {
+    return Prog;
+  }
+  public Program clone()
+  {
+    LinkedList<PR> newProg = new LinkedList<PR>();
+    for(PR p : Prog)
+    {
+      newProg.add(p.clone());
+    }
+    return new Program(newProg);
+  }
+  public String toString()
+  {
+    StringBuilder S = new StringBuilder();
+    for(PR p : Prog)
+    {
+      int t = p.getTimes();
+      char c = p.getC();
+      if(c != 'S')
+      for(int i=0;i<t;i++)
+      {
+        S.append(c);
+      }
+    }
+    return S.toString();
+  }
 }
+

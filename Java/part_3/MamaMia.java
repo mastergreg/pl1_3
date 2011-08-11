@@ -6,13 +6,13 @@
 
 * Creation Date : 05-07-2011
 
-* Last Modified : Sat 06 Aug 2011 08:14:28 PM EEST
+* Last Modified : Fri 05 Aug 2011 08:59:16 AM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
 _._._._._._._._._._._._._._._._._._._._._.*/
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 public class MamaMia
@@ -32,27 +32,28 @@ public class MamaMia
       int lo = Integer.parseInt(input[4]);
       int ho = Integer.parseInt(input[5]);
       int minLimit = Math.min((int) Math.floor(lo/a)
-                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))));
+                 ,(int) (Math.floor(Math.log(lo)/Math.log(m))))-1;
       int maxLimit = Math.max((int) Math.ceil(ho/a)
                  ,(int) (Math.ceil(Math.log(ho)/Math.log(m))));
 
       int status=-1;
       ProgramsGenerator PGen = new ProgramsGenerator(minLimit);
-      ArrayList<Program> Progs=null;
-      ArrayList<Program> newProgs=null;
+      LinkedList<Program> Progs=null;
+      LinkedList<Program> newProgs=null;
       Runner runner=null;
 
       runner = new Runner();
-      newProgs = new ArrayList<Program>();
+      newProgs = new LinkedList<Program>();
       PGen.fillProgList();
       for(int i = 0 ; i<= maxLimit ; i++)
       {
         Progs = PGen.getProgList();
         newProgs.clear();
-        newProgs.ensureCapacity(Progs.size());
         for(Program Prog:Progs)
         {
+          //runner = new Runner(a,m,li,hi,Prog);
           runner.SetRunner(a,m,li,hi,Prog);
+          runner.run();
           status = runner.outPutCheck(lo,ho);
           if(status==0)
           {
@@ -75,11 +76,8 @@ public class MamaMia
             newProgs.add(Prog);
             //System.out.println("Status 2");
           }
-        //System.out.println(Prog.toString().length()+" "+Progs.size());
+        //System.out.println(Prog.length()+" "+Progs.size());
         }
-        //PGen.printProgsSize();
-        //PGen.printProgs();
-        newProgs.trimToSize();
         PGen.setProgList(newProgs);
         PGen.makeMoreProgs();
       }
