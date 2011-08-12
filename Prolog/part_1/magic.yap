@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 09 Aug 2011 07:56:52 PM EEST
+% * Last Modified : Fri 12 Aug 2011 01:37:46 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -36,6 +36,7 @@
     reverse(SA,RSA),
     sub(BASE,SA,RSA,A).
     
+  %returns the next number (not sorted)
   next(BASE,A,NXT) :-
     nextH2(BASE,A,NXT,1).
   nextH2(_   ,[]    ,[]     ,_) :- !.
@@ -48,6 +49,7 @@
     ),
     nextH2(BASE,AS,NXT,CARRY2).
 
+  %builds nextReverse with tail recursion
   nextREV(BASE,A,NXT) :-
     nextHREV(BASE,A,NXT,1,[]).
   nextHREV(_,[],ACC,_,ACC):-!.
@@ -59,6 +61,7 @@
     ),
     nextHREV(BASE,AS,NXT,CARRY2,[AL|ACC]).
 
+  %checks to be sorted
   makeSNEXT(_  ,[]  ,[]   ):-!.
   makeSNEXT(MAX,[R|RNXT],[S|SRNXT]):-
     (
@@ -68,6 +71,8 @@
     ),
     makeSNEXT(MAX2,RNXT,SRNXT).
 
+  %builds sorted next nubers at the desired base
+
   superNEXT(BASE,A,SNXT):-
     nextREV(BASE,A,RNXT),
     makeSNEXT(0,RNXT,SRNXT),
@@ -75,27 +80,24 @@
 
     
 
+  %build a zero filled initial list
   makeStart([]    ,0):-!.
   makeStart([L|LS],DIGITS):-!,
-    length([L|LS],DIGITS),
     NDIG is DIGITS-1,
     L=0,
     makeStart(LS,NDIG).
 
-    
-  
-  %nth(0,[X|_],X).
-  %nth(N,[_|T],R):- M is N-1,nth(M,T,R).
-
-
+  %produce the contestant based on NUM
   makeContestant(BASE,NUM,CONTESTANT):-
       reverse(NUM,RSNUM),
       sub(BASE,NUM,RSNUM,CONTESTANT).
 
+  %check if the list has exceeded the limit
   failNum(LIMIT,NUM):-
     nth(LIMIT,NUM,A),
     A>0.  
 
+  %finds Magic if exists, returns 0 otherwise
   findMagic(LIMIT,BASE,NUM,RNUM):-
     (
         failNum(LIMIT,NUM) -> RNUM=0 
@@ -109,14 +111,17 @@
       )
     ).
 
+  %computes magic from base to dec
   computed(_,[],_,RESULT,RESULT):-!.
   computed(BASE,[N|NUM],POWER,RESULT,RETURN):-
     RESULT2 is RESULT+N*BASE^POWER,
     POWER2 is POWER+1,
     computed(BASE,NUM,POWER2,RESULT2,RETURN).
+
+  
   magic(BASE,DIGITS,NUM) :-
     makeStart(ST,DIGITS),
-    next(10,ST,START),
+    next(BASE,ST,START),
     LIMIT is truncate(DIGITS/2)+1,
     findMagic(LIMIT,BASE,START,RNUM),
     computed(BASE,RNUM,0,0,NUM2),
