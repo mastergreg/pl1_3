@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Fri 12 Aug 2011 01:37:46 PM EEST
+% * Last Modified : Tue 23 Aug 2011 01:26:12 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -126,7 +126,7 @@
     findMagic(LIMIT,BASE,START,RNUM),
     computed(BASE,RNUM,0,0,NUM2),
     (
-      NUM2 = 0 -> fail
+      NUM2 = 0.0 -> fail
       ;
       NUM = NUM2
     ).
