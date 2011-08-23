@@ -6,7 +6,7 @@
 
 * Creation Date : 06-08-2011
 
-* Last Modified : Sat 20 Dec 2008 09:37:30 AM PST
+* Last Modified : Tue 23 Aug 2011 01:44:39 PM EEST
 
 * Created By : Greg Liras <gregliras@gmail.com>
 
@@ -21,6 +21,7 @@ fun encode (c:char) [] = [(c,1)]
     if (c=hc)
       then (c,(hn+1))::tl
       else (c,1)::(hc,hn)::tl
+
 
 
 fun decode rle =
