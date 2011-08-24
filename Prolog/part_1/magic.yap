@@ -118,6 +118,15 @@
     POWER2 is POWER+1,
     computed(BASE,NUM,POWER2,RESULT2,RETURN).
 
+  getNumToDec([],0,[]).
+  getNumToDec([N|NUM],C,[R|RNUM]):-
+    B is N+C,
+    R is B mod 10,
+    C2 is B // 10,
+    getNumToDec(NUM,C2,RNUM).
+    
+
+
   
   magic(BASE,DIGITS,NUM) :-
     makeStart(ST,DIGITS),
