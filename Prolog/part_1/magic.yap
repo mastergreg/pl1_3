@@ -6,7 +6,7 @@
 % 
 % * Creation Date : 28-06-2011
 % 
-% * Last Modified : Tue 23 Aug 2011 01:26:12 PM EEST
+% * Last Modified : Thu 25 Aug 2011 05:16:06 PM EEST
 % 
 % * Created By : Greg Liras <gregliras@gmail.com>
 % 
@@ -118,12 +118,39 @@
     POWER2 is POWER+1,
     computed(BASE,NUM,POWER2,RESULT2,RETURN).
 
-  getNumToDec([],0,[]).
-  getNumToDec([N|NUM],C,[R|RNUM]):-
+
+
+
+  getNumToDecL([],_,0,[]).
+  getNumToDecL([N],BASE,C,[R|RNUM]):-
+    RT is N+C,
+    (
+        RT < 10 -> R = RT, RNUM = []
+      ;
+        R is RT mod 10,
+        C2 is RT // 10,
+        getNumToDecL(NUM,BASE,C2,RNUM)
+    ).
+  getNumToDecL([N|NUM],C,[R|RNUM]):-
+    RT is N+C,
+    (
+        RT < 10 -> getNumToDecL(NUM,RT,[R|RNUM])
+      ;
+        R is RT mod 10,
+        C2 is RT // 10,
+        getNumToDecL(NUM,C2,RNUM)
+    ).
+    
+  getNumToDecH([],0,[]).
+  getNumToDecH([],C,[R|RNUM]):-
+    R is C mod 10,
+    C2 is C // 10,
+    getNumToDecH([],C2,[RNUM]).
+  getNumToDecH([N|NUM],C,[R|RNUM]):-
     B is N+C,
     R is B mod 10,
     C2 is B // 10,
-    getNumToDec(NUM,C2,RNUM).
+    getNumToDecH(NUM,C2,RNUM).
     
 
 
@@ -134,8 +161,9 @@
     LIMIT is truncate(DIGITS/2)+1,
     findMagic(LIMIT,BASE,START,RNUM),
     computed(BASE,RNUM,0,0,NUM2),
+    NUM3 is integer(NUM2),
     (
-      NUM2 = 0.0 -> fail
+      NUM3 = 0 -> fail
       ;
-      NUM = NUM2
+      NUM = NUM3
     ).
